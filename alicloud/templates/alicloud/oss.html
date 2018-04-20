@@ -1,0 +1,78 @@
+{% extends './base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %} {% endblock %}
+
+
+
+{% block content %}
+    <h1>{{ msg|capfirst }}</h1>
+
+    <ul class="messagelist">
+        <li><a href="/">Home</a></li>
+        <li><a href="/ecs/">ECS - Elastic Compute Service</a></li>
+        <li><a href="#">Network ...</a></li>
+    </ul>
+
+
+
+    <div style="padding-left: 30px" >
+        <form method="POST">
+                {% csrf_token %}
+
+            {% if messages %}
+            <ul>
+                {% for m in messages %}
+                <li class="{{ message.tags }}">{{ m }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <label for="buckets">Select a bucket:</label> <select id="buckets" name="bucket_sel" onchange="this.form.submit();">
+                <option value="" selected>[create new...]</option>
+                {% for r in buckets %}
+                <option value="{{ r }}" {% if request.POST.bucket == r or request.POST.bucket_sel == r %}selected{% endif %}>{{ r }}</option>
+                {% endfor %}
+            </select>
+            or create a bucket:
+            <input id="bucket" name="bucket" value="" placeholder="bucket name">
+            <div class="form-group">
+                put a object:
+                <input id="key" name="key" value="" placeholder="object key">
+                <input id="obj" name="obj" value="" placeholder="put some text to upload">
+            </div>
+
+            <div class="form-group">
+                <label for="objs">delete a object:</label> <select id="objs" name="obj_sel">
+                    <option value="" selected></option>
+                    {% for r in objects %}
+                    <option value="{{ r.key }}" url="{{ r.url|default_if_none:'' }}">{{ r.key }}</option>
+                    {% endfor %}
+                </select>
+                <button id="go_url" type="button">view</button>
+            </div>
+            <button type="submit">submit</button> <button type="reset">reset</button>
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    {{ block.super }}
+    <script>
+    $(document).ready(function(){
+        console.log('ready');
+        $("#go_url").click(function(){
+            var url = $("#objs").find('option:selected').attr('url');
+            console.log(url);
+            if (url) {
+                window.open(url);
+                this.form.reset();
+            } else {
+                alert('Please select a object to view.');
+            }
+        });
+    });
+    </script>
+{% endblock %}

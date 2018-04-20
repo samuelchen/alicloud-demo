@@ -1,0 +1,122 @@
+{% extends './base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %} {% endblock %}
+
+
+
+{% block content %}
+    <h1>DXC CPS Alicloud Demo</h1>
+
+{#    <ul>#}
+{#        <li><a href="{% url 'ecs' %}">ECS - Elastic Compute Service</a></li>#}
+{#        <li><a href="{% url 'oss' %}">OSS - Object Storage Service</a></li>#}
+{#        <li><a href="#">Network ...</a></li>#}
+{#    </ul>#}
+
+
+<form class="form-horizontal" role="form" method="POST">
+    {% csrf_token %}
+	<div class="form-group">
+	    <label for="region" class="col-sm-2 control-label">Region</label>
+	    <div class="col-sm-2">
+	    <select name="region" class="form-control">
+	      <option value="cn-hangzhou">Hangzhou</option>
+	      <option value="cn-beijing">Beijing</option>
+	    </select>
+	    </div>
+  </div>
+  
+	<div class="form-group">
+	    <label for="zone" class="col-sm-2 control-label">Zone</label>
+	    <div class="col-sm-2">
+	    <select name="zone" class="form-control">
+	      <option value="a">Zone A</option>
+	      <option value="b">Zone B</option>
+	    </select>
+	    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="vpc_name" class="col-sm-2 control-label">VPC Name</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="vpc_name" placeholder="vpc_name">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="vpc_cidr" class="col-sm-2 control-label">VPC CIDR</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="vpc_cidr" placeholder="192.168.0.0/16">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="switch_name" class="col-sm-2 control-label">Switch Name</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="switch_name" placeholder="switch_name">
+    </div>
+  </div>
+  
+
+  <div class="form-group">
+    <label for="switch_cidr" class="col-sm-2 control-label">Switch CIDR</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="switch_cidr" placeholder="switch_cidr">
+    </div>
+  </div>
+  
+
+  <div class="form-group">
+    <label for="vm_name" class="col-sm-2 control-label">VM Name</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="vm_name" placeholder="vm_name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="vm_ip" class="col-sm-2 control-label">VM IP</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" id="vm_ip" placeholder="vm_ip">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="vm_image" class="col-sm-2 control-label">VM Image</label>
+    <div class="col-sm-2">
+      <select name="vm_image" class="form-control">
+	       <option value="m-bp13yd4r85qv3bd8dmym">Web Server</option>
+     </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="vm_flavor" class="col-sm-2 control-label">VM Flavor</label>
+    <div class="col-sm-2">
+       <select name="vm_flavor" class="form-control">
+	       <option value="ecs.t5-lc2m1.nano">Default Flavor</option>
+     </select>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="security_group" class="col-sm-2 control-label">Security Group</label>
+    <div class="col-sm-2">
+       <select name="security_group" class="form-control">
+	       <option value="sg-bp144wg7yw6hv26rr9hq">Default Group</option>
+     </select>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Create</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}

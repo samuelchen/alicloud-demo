@@ -1,0 +1,7 @@
+django==1.11.11
+aliyun-python-sdk-core-v3==2.8.6
+aliyun-python-sdk-ecs==4.6.5
+oss2==2.4.0
+
+#vpc
+aliyun-python-sdk-vpc==3.0.2

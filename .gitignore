@@ -1,3 +1,9 @@
+.idea
+*.log
+*.sqlite3
+settings_dev.py
+temp/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -99,3 +105,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+.settings/*
