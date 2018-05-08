@@ -14,6 +14,7 @@ from aliyunsdkecs.request.v20140526 import (
 import logging
 import json
 from django.core.cache import cache
+from django.conf import settings
 
 log = logging.getLogger(__name__)
 

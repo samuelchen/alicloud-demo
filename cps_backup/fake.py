@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-if __name__ == '__main__':
-    from alicloud.settings_dev import ACCESS_KEY, ACCESS_KEY_SECRET
-else:
-    from ..settings_dev import ACCESS_KEY, ACCESS_KEY_SECRET
+from alicloud.settings_dev import ACCESS_KEY, ACCESS_KEY_SECRET
 
 
 class Credentials:

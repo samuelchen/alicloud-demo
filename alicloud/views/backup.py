@@ -19,14 +19,15 @@ from ..wrapper.ecs import (
     del_vm,
     tag_vm,
 )
+from cps_backup.index import BackupHandler
 
 log = logging.getLogger(__name__)
 
 
-class ECSView(TemplateView):
+class BackupView(TemplateView):
 
     def get(self, request, *args, **kwargs):
-        return super(ECSView, self).get(request, *args, **kwargs)
+        return super(BackupView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
 
@@ -67,21 +68,32 @@ class ECSView(TemplateView):
 
         if r:
             log.debug(r)
-        return super(ECSView, self).get(request, *args, **kwargs)
+        return super(BackupView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(ECSView, self).get_context_data(**kwargs)
+        context = super(BackupView, self).get_context_data(**kwargs)
         region = self.get_request_field('region')
         zone = self.get_request_field('zone')
-        # flavor = self.get_request_field('flavor')
-        # image = self.get_request_field('image')
 
         regions = list_regions()
         context['regions'] = regions
         if not region:
             region = regions['Regions']['Region'][0]['RegionId']
 
+        backup_handler = BackupHandler()
+        schedules = backup_handler.get_schedulers()
+
         vms = list_vms(region)
+        for vm in vms['Instances']['Instance']:
+            tags = {}
+            for t in vm['Tags']['Tag']:
+                k = t['TagKey']
+                v = t['TagValue']
+                tags[t['TagKey']] = t['TagValue']
+
+            if not tags:
+                tags = {'Backup': False, 'BackupSchedule': 'Default'}
+            vm['tags'] = tags
         context['vms'] = vms
 
         if region:
@@ -90,15 +102,9 @@ class ECSView(TemplateView):
             if not zone:
                 zone = zones['Zones']['Zone'][0]['ZoneId']
 
-            images = list_images(region)
-            context['images'] = images
-
             for z in zones['Zones']['Zone']:
                 if z['ZoneId'] == zone:
                     context['flavors'] = sorted(z['AvailableInstanceTypes']['InstanceTypes'])
-
-            if 'flavors' not in context:
-                context['flavors'] = sorted(zones['Zones']['Zone'][0]['AvailableInstanceTypes']['InstanceTypes'])
 
         return context
 

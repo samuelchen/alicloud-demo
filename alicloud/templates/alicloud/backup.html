@@ -7,12 +7,12 @@
 
 
 {% block content %}
-    <h1>ECS - Elastic Compute Service</h1>
+    <h1>CPS - Backup Service</h1>
 
     <ul>
         <li><a href="/">Home</a></li>
+        <li><a href="/ecs/">ECS - Elastic Compute Service</a></li>
         <li><a href="/oss/">OSS - Object Storage Service</a></li>
-        <li><a href="/backup/">CPS Backup Service</a></li>
     </ul>
     <div style="padding-left: 30px">
         <form method="POST">
@@ -31,23 +31,6 @@
                 {% endfor %}
             </select>
 
-            <label for="flavor">Size:</label>
-            <select id="flavor" name="flavor">
-                {% for r in flavors %}
-                <option value="{{ r }}" {% if request.POST.flavor == r %}selected{% endif %}>{{ r }}</option>
-                {% endfor %}
-            </select>
-
-            <br>
-            <label for="image">Images:</label>
-            <select id="image" name="image">
-                {% for r in images.Images.Image %}
-                    {% if r.Status == 'Available' %}
-                <option value="{{ r.ImageId }}" {% if request.POST.image == r.ImageId %}selected{% endif %}>{{ r.OSType }} - {{ r.Architecture }} - {{ r.ImageName }}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-
             <br>
             <input id="action" name="action" type="hidden" value="">
             <input id="kwargs" name="kwargs" type="hidden" value="">
@@ -59,27 +42,34 @@
                 <table id="vms" border="1px" style="width: 95%;">
                     <thead>
                         <tr>
-                            <td>ID</td><td>Type</td>
-                            <td>Region</td><td>Zone</td><td>Status</td>
-                            <td>Float IP</td>
+                            <td>ID</td>
+{#                            <td>Type</td>#}
+{#                            <td>Region</td>#}
+                            <td>Zone</td><td>Status</td>
+{#                            <td>Float IP</td>#}
 {#                            <td>Public IPs</td>#}
-                            <td>VPC IPs</td>
+{#                            <td>VPC IPs</td>#}
 {#                            <td>Internal IPs</td>#}
-                            <td>Tags</td>
+                            <td>Backup</td>
+                            <td>Backup Schedule</td>
                             <td>Actions</td>
                         </tr>
                     </thead>
                     {% for r in vms.Instances.Instance %}
                     <tr>
-                        <td>{{ r.InstanceId }}</td><td>{{ r.InstanceType }}</td>
-                        <td>{{ r.RegionId }}</td><td>{{ r.ZoneId }}</td><td>{{ r.Status }}</td>
-                        <td>{{ r.EipAddress.IpAddress }}</td>
+                        <td>{{ r.InstanceId }}</td>
+{#                        <td>{{ r.InstanceType }}</td>#}
+{#                        <td>{{ r.RegionId }}</td>#}
+                        <td>{{ r.ZoneId }}</td><td>{{ r.Status }}</td>
+{#                        <td>{{ r.EipAddress.IpAddress }}</td>#}
 {#                        <td>{% for ip in r.PublicIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>#}
-                        <td>{% for ip in r.VpcAttributes.PrivateIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>
+{#                        <td>{% for ip in r.VpcAttributes.PrivateIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>#}
 {#                        <td>{% for ip in r.InnerIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>#}
-                        <td>
-                            {% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}
-                        </td>
+{#                        <td>#}
+{#                            {% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}#}
+{#                        </td>#}
+                        <td>{{ r.tags.Backup }}</td>
+                        <td>{{ r.tags.BackupSchedule }}</td>
                         <td>
                             <a class="tag" args="{{ r.InstanceId }}" kwargs="{% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}" href="#"><i class="fa fa-tags"></i></a>
                             {% if r.Status.lower == 'stopped' %}

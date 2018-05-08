@@ -11,6 +11,7 @@ from aliyunsdkecs.request.v20140526 import (
     StopInstanceRequest,
     RebootInstanceRequest,
     DeleteInstanceRequest,
+    AddTagsRequest,
 )
 from django.conf import settings
 from .common import (
@@ -107,3 +108,48 @@ def list_vms(region, ids=None):
 
 def get_vm(region, vmid):
     return list_vms(region, ids=[vmid, ])
+
+
+def tag_vm(vm_id, **tag_vals):
+
+    l = len(tag_vals)
+    if l == 0:
+        return None
+
+    if l > 10:
+        print('Support max to 10 tags per resource')
+        return None
+
+    asc_client = create_acs_client()
+
+    rc = []
+    i = 1
+    is_submited = False
+    if tag_vals:
+        for tag, val in tag_vals.items():
+            if (i-1) % 5 == 0:
+                request = AddTagsRequest.AddTagsRequest()
+                request.set_action_name('AddTags')
+                request.set_ResourceType('instance')
+                request.set_ResourceId(vm_id)
+                is_submited = False
+
+            key_name = 'Tag.%d.Key' % i
+            val_name = 'Tag.%d.Value' % i
+
+            request.add_query_param(key_name, tag)
+            request.add_query_param(val_name, val)
+
+            i += 1
+
+            if (i-1) % 5 == 0:
+                response = asc_client.do_action_with_exception(request)
+                rc.append(json.loads(response.decode()))
+                is_submited = True
+                i = 1
+
+    if not is_submited:
+        response = asc_client.do_action_with_exception(request)
+        rc.append(json.loads(response.decode()))
+
+    return rc

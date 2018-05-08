@@ -18,7 +18,7 @@ from django.contrib import admin
 from .views.index import IndexView
 from .views.ecs import ECSView
 from .views.oss import OSSView
-
+from .views.backup import BackupView
 
 def t(name):
     return 'alicloud/' + name
@@ -29,5 +29,8 @@ urlpatterns = [
     url(r'^$', IndexView.as_view(template_name=t('index.html')), name='index'),
     url(r'^ecs/$', ECSView.as_view(template_name=t('ecs.html')), name='ecs'),
     url(r'^oss/$', OSSView.as_view(template_name=t('oss.html')), name='oss'),
+
+
+    url(r'^backup/', BackupView.as_view(template_name=t('backup.html')), name='backup'),
 
 ]

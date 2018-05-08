@@ -5,3 +5,7 @@ oss2==2.4.0
 
 #vpc
 aliyun-python-sdk-vpc==3.0.2
+
+
+# fuctional compute
+aliyun-fc2
