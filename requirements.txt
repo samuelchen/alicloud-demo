@@ -9,3 +9,7 @@ aliyun-python-sdk-vpc==3.0.2
 
 # fuctional compute
 aliyun-fc2
+
+
+# log
+aliyun-log-python-sdk

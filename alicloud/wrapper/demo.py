@@ -35,7 +35,6 @@ def demo(params):
     vpc = VpcManager(settings.ACCESS_KEY, settings.ACCESS_KEY_SECRET, region)
     vpc_id, vswitch_id, nat_gateway_id, eip = vpc.create_vpc_all_in_one(vpc_name, vpc_cidr, vswitch_obj)
 
-
     sg = create_secur_group(region, vpc_id)
     securegroup = sg['SecurityGroupId']
     if securegroup:

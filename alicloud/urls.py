@@ -19,6 +19,7 @@ from .views.index import IndexView
 from .views.ecs import ECSView
 from .views.oss import OSSView
 from .views.backup import BackupView
+from .views import baksvc
 
 def t(name):
     return 'alicloud/' + name
@@ -32,5 +33,8 @@ urlpatterns = [
 
 
     url(r'^backup/', BackupView.as_view(template_name=t('backup.html')), name='backup'),
+
+
+    url(r'^baksvc/', baksvc.HomeView.as_view(template_name=t('baksvc/home.html')), name='baksvc_home'),
 
 ]

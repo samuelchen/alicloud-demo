@@ -18,8 +18,11 @@ from ..wrapper.ecs import (
     reboot_vm,
     del_vm,
     tag_vm,
+    list_snapshots,
 )
 from cps_backup.index import BackupHandler
+from django.core.cache import cache
+
 
 log = logging.getLogger(__name__)
 
@@ -33,8 +36,6 @@ class BackupView(TemplateView):
 
         region = self.request.POST.get('region')
         zone = self.request.POST.get('zone')
-        flavor = self.request.POST.get('flavor')
-        image = self.request.POST.get('image')
         action = self.request.POST.get('action')
         kw_args = self.request.POST.get('kwargs')
         r = None
@@ -42,12 +43,8 @@ class BackupView(TemplateView):
             tmp = action.split()
             action = tmp[0]
             args = tmp[1:]
-            if action == 'create':
-                r = create_secur_group(region)
-                secur_group = r['SecurityGroupId']
-                if secur_group:
-                    assign_rule_to_secur_group(region, secur_group, 'tcp', '80/80', '0.0.0.0/0')
-                r = create_vm('cps_vm1', region, zone, flavor, image, secur_group=secur_group)
+            if action == 'trigger':
+                pass
             elif action == 'start':
                 r = start_vm(*args)
             elif action == 'stop':
@@ -80,16 +77,28 @@ class BackupView(TemplateView):
         if not region:
             region = regions['Regions']['Region'][0]['RegionId']
 
-        backup_handler = BackupHandler()
-        schedules = backup_handler.get_schedulers()
+        # backup_handler = BackupHandler(region=region, access_key=settings.ACCESS_KEY, access_key_secret=settings.ACCESS_KEY_SECRET)
+
+        # schedules = cache.get('schedules')
+        # if not schedules:
+        #     schedules = backup_handler.get_schedulers()
+        #     cache.set('schedules', schedules)
+        # context['schedules'] = schedules
+
+        snapshots = list_snapshots(region)
+        if snapshots:
+            snapshots = snapshots['Snapshots']['Snapshot']
+
+        context['snapshots'] = snapshots
 
         vms = list_vms(region)
         for vm in vms['Instances']['Instance']:
             tags = {}
-            for t in vm['Tags']['Tag']:
-                k = t['TagKey']
-                v = t['TagValue']
-                tags[t['TagKey']] = t['TagValue']
+            if 'Tags' in vm:
+                for t in vm['Tags']['Tag']:
+                    k = t['TagKey']
+                    v = t['TagValue']
+                    tags[k] = v
 
             if not tags:
                 tags = {'Backup': False, 'BackupSchedule': 'Default'}
@@ -111,3 +120,6 @@ class BackupView(TemplateView):
     def get_request_field(self, name, default=None):
         # return self.request.POST.get(name, self.request.GET.get(name, default))
         return self.request.POST.get(name, default)
+
+    def trigger_backup(self):
+        url = 'http://1563557888557255.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/test/test1/action?resources=Create&Backupschedule=Default'

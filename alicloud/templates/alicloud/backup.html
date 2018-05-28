@@ -34,7 +34,7 @@
             <br>
             <input id="action" name="action" type="hidden" value="">
             <input id="kwargs" name="kwargs" type="hidden" value="">
-            <button id="create" type="button" >Create Instance</button>
+            <button id="trigger" type="button" >Trigger</button>
             <button id="refresh" type="button" >Refresh</button>
 
             <div>
@@ -50,9 +50,9 @@
 {#                            <td>Public IPs</td>#}
 {#                            <td>VPC IPs</td>#}
 {#                            <td>Internal IPs</td>#}
-                            <td>Backup</td>
+                            <td style="background-color: #b1dfbb">Backup</td>
                             <td>Backup Schedule</td>
-                            <td>Actions</td>
+{#                            <td>Actions</td>#}
                         </tr>
                     </thead>
                     {% for r in vms.Instances.Instance %}
@@ -68,19 +68,52 @@
 {#                        <td>#}
 {#                            {% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}#}
 {#                        </td>#}
-                        <td>{{ r.tags.Backup }}</td>
+                        <td style="background-color: #b1dfbb">{{ r.tags.Backup }}</td>
                         <td>{{ r.tags.BackupSchedule }}</td>
+{#                        <td>#}
+{#                            <a class="tag" args="{{ r.InstanceId }}" kwargs="{% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}" href="#"><i class="fa fa-tags"></i></a>#}
+{#                            {% if r.Status.lower == 'stopped' %}#}
+{#                            <a class="start" args="{{ r.InstanceId }}" href="#"><i class="fa fa-play"></i></a>#}
+{#                            <a class="delete" args="{{ r.InstanceId }}" href="#"><i class="fa fa-trash-alt"></i></a>#}
+{#                            {% endif %}#}
+{#                            {% if r.Status.lower == 'running' %}#}
+{#                            <a class="stop" args="{{ r.InstanceId }}" href="#"><i class="fa fa-stop"></i></a>#}
+{#                            <a class="reboot" args="{{ r.InstanceId }}" href="#"><i class="fa fa-recycle"></i></a>#}
+{#                            {% endif %}#}
+{#                        </td>#}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+
+            <div>
+                <label for="snapshots">Backups:</label>
+                <table id="snapshots" border="1px" style="width: 95%;">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Tags</td>
+                            <td>DiskId</td>
+                            <td>DiskType</td>
+                            <td>DiskSize</td>
+                            <td>Status</td>
+                            <td>Progress</td>
+                            <td>CreateAt</td>
+                        </tr>
+                    </thead>
+                    {% for s in snapshots %}
+                    <tr>
+                        <td>{{ s.SnapshotId }}</td>
                         <td>
-                            <a class="tag" args="{{ r.InstanceId }}" kwargs="{% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}" href="#"><i class="fa fa-tags"></i></a>
-                            {% if r.Status.lower == 'stopped' %}
-                            <a class="start" args="{{ r.InstanceId }}" href="#"><i class="fa fa-play"></i></a>
-                            <a class="delete" args="{{ r.InstanceId }}" href="#"><i class="fa fa-trash-alt"></i></a>
-                            {% endif %}
-                            {% if r.Status.lower == 'running' %}
-                            <a class="stop" args="{{ r.InstanceId }}" href="#"><i class="fa fa-stop"></i></a>
-                            <a class="reboot" args="{{ r.InstanceId }}" href="#"><i class="fa fa-recycle"></i></a>
-                            {% endif %}
+                            {% for t in s.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }} <br/> {% endfor %}
                         </td>
+                        <td>{{ s.SourceDiskId }}</td>
+                        <td>{{ s.SourceDiskType }}</td>
+                        <td>{{ s.SourceDiskSize }}G</td>
+                        <td>{{ s.Status }}</td>
+                        <td>{{ s.Progress }}</td>
+                        <td>{{ s.CreationTime }}</td>
                     </tr>
                     {% endfor %}
                 </table>
@@ -97,8 +130,8 @@
         var kwargs = $("#kwargs");
         var form = $("form");
 
-        $("#create").click(function(){
-            action.val('create');
+        $("#trigger").click(function(){
+            action.val('trigger');
             form.submit();
         });
         $("#refresh").click(function(){

@@ -2,16 +2,32 @@
 # coding: utf-8
 
 
-my_account = Account(endpoint, accid, acckey, token)
-queue_name = sys.argv[1] if len(sys.argv) > 1 else "MySampleQueue"
-my_queue = my_account.get_queue(queue_name)
-#you can get more information of QueueMeta from mns/queue.py
-queue_meta = QueueMeta()
-try:
-    queue_url = my_queue.create(queue_meta)
-    print "Create Queue Succeed! QueueName:%s\n" % queue_name
-except MNSExceptionBase, e:
-    if e.type == "QueueAlreadyExist":
-        print "Queue already exist, please delete it before creating or use it directly."
-        sys.exit(0)
-    print "Create Queue Fail! Exception:%s\n" % e
+import time
+from aliyun.log.logitem import LogItem
+from aliyun.log.logclient import LogClient
+from aliyun.log.putlogsrequest import PutLogsRequest
+
+
+class AliYunLogService(object):
+
+    def __init__(self, access_key, access_key_secret, region='cn-hangzhou',
+                 project='log-project-001', logstore='logstore-backup'):
+        self._access_key = access_key
+        self._access_key_secret = access_key_secret
+        self._region = region
+        self._project = project
+        self._logstore = logstore
+        self._endpoint = '%s.log.aliyuncs.com' % self._region
+        self._client = LogClient(self._endpoint, self._access_key, self._access_key_secret)
+
+        self._topic = 'BackupLogs'
+
+    def log(self, topic, source, contents):
+        logitemList = []
+        logItem = LogItem()
+        logItem.set_time(int(time.time()))
+        logItem.set_contents(contents)
+        logitemList.append(logItem)
+        req = PutLogsRequest(self._project, self._logstore, topic, source, logitemList)
+        resp = self._client.put_logs(req)
+        return resp

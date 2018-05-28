@@ -12,6 +12,7 @@ from aliyunsdkecs.request.v20140526 import (
     RebootInstanceRequest,
     DeleteInstanceRequest,
     AddTagsRequest,
+    DescribeSnapshotsRequest,
 )
 from django.conf import settings
 from .common import (
@@ -153,3 +154,16 @@ def tag_vm(vm_id, **tag_vals):
         rc.append(json.loads(response.decode()))
 
     return rc
+
+
+def list_snapshots(region, ids=None):
+    client = create_acs_client(region=region)
+
+    request = DescribeSnapshotsRequest.DescribeSnapshotsRequest()
+    request.set_action_name('DescribeSnapshots')
+    # request.add_query_param('RegionId', region)
+    request.add_query_param('PageSize', 100)
+    response = client.do_action_with_exception(request)
+    r = json.loads(response.decode())
+    log.debug(r)
+    return r
