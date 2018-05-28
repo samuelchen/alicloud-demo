@@ -1,0 +1,28 @@
+{% extends './base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %} {% endblock %}
+
+
+
+{% block content %}
+    <h1>DXC Managed Service for Alibaba Cloud - Backup service Demo</h1>
+
+    <ul>
+        <li><a href="{% url 'ecs' %}">ECS - Elastic Compute Service</a></li>
+        <li><a href="{% url 'oss' %}">OSS - Object Storage Service</a></li>
+        <li><a href="{% url 'backup' %}">Backup - Snapshots</a></li>
+    </ul>
+
+
+<form class="form-horizontal" role="form" method="POST">
+    {% csrf_token %}
+
+</form>
+
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}

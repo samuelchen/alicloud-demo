@@ -1,0 +1,38 @@
+/**
+* CSS stylesheet for chat activity formatter
+*/
+
+span.chat_date {
+font-weight: bold;
+}
+
+span.chat_closed {
+color: #888888;
+}
+
+span.chat_messages {
+margin-left: 20px;
+}
+
+span.chat_user {
+color:DarkBlue;
+font-weight:bold;
+}
+
+span.chat_message {
+margin-bottom: 2px;
+}
+
+span.chat_spacer {
+margin-right: 8px;
+}
+
+div.chat_warning {
+background-color: lightyellow;
+border: 1px solid orange;
+padding:3px;
+}
+
+TD.chat_label_left {
+line-height:19px;
+}

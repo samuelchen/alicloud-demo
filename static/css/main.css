@@ -1,0 +1,606 @@
+
+.pull-right {
+    float: right;
+}
+
+/* CSC Self-Service - Base Stylesheet */
+
+.row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+html, body, input, select, textarea {
+    font: normal 12px/1.5em Arial, Helvetica, sans-serif !important;
+    color: #747678;
+}
+
+ul li {
+    list-style: none;
+}
+
+.snc-article-content-text#article > ul li {
+    list-style: inherit;
+}
+
+table#item_table ul li {
+    list-style: inherit;
+}
+
+/*When viewing catalog items through MyRequests*/
+#element\.sc_req_item\.cat_item\.description ul li {
+    list-style: inherit;
+}
+
+ul {
+    padding-left: 0px;
+}
+
+a:hover {
+    color: #2A5DB0 !important;
+}
+
+.selfservice-container {
+    max-height: 1920px;
+    margin: 0 auto;
+}
+
+.main-breadcrumb {
+    display: block;
+    font-size: 12px;
+    padding: 18px 25px 0px 25px;
+    margin: 0 5px;
+    margin-bottom: 12px;
+}
+
+.breadcrumb-inner-container, .breadcrumb-inner-container > a {
+    color: #747678;
+}
+
+span.current-page-title {
+    font-weight: bold;
+}
+
+div#top_search {
+    display: none;
+}
+
+.ticket_status_frame {
+    height: 500px !important;
+    overflow: auto;
+}
+
+div#login-logo {
+    margin-bottom: 10px;
+}
+
+Div.kb-article-view-count {
+    padding: 10px 20px;
+}
+
+div#articleTitleReadonly {
+    padding: 10px 0;
+    line-height: normal;
+}
+
+@media (min-width: 768px) {
+    .form-horizontal .control-label {
+        text-align: left;
+    }
+}
+
+.kb_view_breadcrumb {
+    font-size: 12px !important;
+}
+
+div.snc-kb-navbar-right > div.btn-group > button.btn.btn-default.dropdown-toggle {
+    display: none;
+}
+
+BODY {
+    height: auto;
+}
+
+/* CSC Self-Service - Header Stylesheet */
+
+div.cms_header, div.cms_header table {
+}
+
+td.cms_header_logo {
+    width: 1px;
+}
+
+.context_menu {
+    position: absolute !important;
+}
+
+div.cms_header table.cms_header_table {
+    background: transparent;
+}
+
+div.cms_header table td {
+    background: transparent;
+}
+
+tr.cms_header_top_menu_row {
+    height: 24px;
+    margin: 0px;
+    padding: 0px;
+    line-height: 24px;
+}
+
+div.cms_header_top_menu, div.cms_header_login, div.cms_header_font_size, div.cms_header_search, div.cms_header_clear {
+}
+
+td.cms_header_top_menu {
+    text-align: right;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    display: inline;
+}
+
+td.cms_header_top_menu div.cms_header_top_menu {
+    background: inherit;
+}
+
+td div.cms_header_search {
+    margin: 2px 5px 2px 2px;
+}
+
+td.cms_header_top_menu div.cms_header_login, td.cms_header_top_menu div.cms_header_font_size, td.cms_header_top_menu div.cms_header_search, td.cms_header_top_menu div.cms_header_clear {
+    display: inline;
+    float: right;
+    white-space: nowrap;
+}
+
+td.cms_header_top_menu div.cms_header_clear {
+    clear: both;
+}
+
+/*  Top Row styles and alignment*/
+/* search removes down arrow */
+img#imgText2 {
+    display: none;
+}
+
+/* login and logout */
+td.cms_header_login, td.cms_header_search {
+    text-align: right;
+    margin: 0px;
+    padding: 0px;
+}
+
+td.cms_header_search {
+    padding-left: 4px;
+}
+
+/* for the user name/password 4fields when a login fails */
+.cms_login_failed_inputs {
+    background-color: #ffffcc
+}
+
+/* for the message that appears under the user name/password when a login fails */
+.cms_login_failed_message {
+    background-color: tomato;
+    color: white;
+    padding: 3px 20px 3px 20px;
+}
+
+td.cms_header_text {
+    padding-top: 6px;
+    text-align: left;
+}
+
+span.cms_header_text {
+    color: #AAA;
+    font-size: 1.8em;
+    font-family: Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    margin-left: 16px;
+}
+
+tr.cms_header_bottom_menu_row {
+    height: 24px;
+    margin: 0px;
+    padding: 0px;
+    line-height: 24px;
+    background-position: center top;
+    background-repeat: repeat-x;
+}
+
+tr.cms_header_bottom_menu_row, td.cms_header_bottom_menu {
+}
+
+td.cms_header_bottom_menu a {
+    /*color: #fff !important;   */
+}
+
+/* CSC Self-Service - Main Header Block Styles */
+
+div.main_header_container {
+    min-width: 960px;
+}
+
+div.main_header_top {
+    margin-top: 15px;
+    position: relative;
+}
+
+div.main_header_left img {
+    margin-bottom: 15px;
+    margin-left: 15px;
+    width: 400px;
+}
+
+div.main_header_right {
+    text-align: right;
+    width: 100%;
+}
+
+div.main_header_right ul li.head {
+    border-right: solid 1px #BFBFBF;
+    display: inline-block;
+    list-style: none;
+    padding: 0 8px;
+}
+
+div.main_header_right ul li.head:first-child {
+    /* padding-left: 0px; */
+}
+
+/*div.main_header_right ul li:last-child {
+    border-right:solid 1px #fff;
+    display:inline-block;
+    list-style:none;
+}*/
+
+li#main_nav_search {
+    border-right: none;
+    padding-right: 0;
+}
+
+li#main_nav_search input#sysparm_search {
+    padding: 1px 5px;
+}
+
+div.tickets_dashboard ul li {
+    width: 95px;
+    margin-left: 3px;
+    margin-top: 3px;
+    float: right;
+    display: inline-block;
+    background-color: #005884;
+    color: #fff;
+    height: 65px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+div.tickets_dashboard ul li a, div.tickets_dashboard ul li a:hover {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff !important;
+    padding: 8px;
+    margin: 0px -5px;
+}
+
+div.tickets_dashboard ul li a span.count_dash_label, div.tickets_dashboard ul li a span.count_dash_label:hover {
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    width: 100%;
+}
+
+div.tickets_dashboard ul li a .badge {
+    background-color: #fff;
+    color: #005884;
+    margin: -3px -8px 0px 5px;
+}
+
+div.tickets_dashboard ul li:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top: 10px solid white;
+    border-right: 10px solid #005884;
+    width: 0;
+    z-index: 100;
+}
+
+nav.main_header_navigation {
+    background: #fff;
+    box-shadow: 0 3px 2px -2px rgba(0, 0, 0, 0.8);
+    border-radius: 0px !important;
+    z-index: 1;
+    border-top: 0px solid #fff;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+/*
+
+nav.main_header_navigation ul > li {
+    display: inline-block;
+    height: 44px;
+    padding: 0 15px;
+    position: relative;
+    border-left: 1px solid #a7a7a7;
+}
+
+nav.main_header_navigation ul > li:last-child {
+    border-right: 1px solid #a7a7a7;
+}
+
+nav.main_header_navigation ul > li > a {
+    color: #444 !important;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    height: 100%;
+    padding: 13px 15px 12px;
+}
+
+nav.main_header_navigation ul > li:hover {
+    text-decoration:none;
+    background: #ef2525;
+    color: #fff;
+}
+
+nav.main_header_navigation ul > li:hover > a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav.main_header_navigation ul > li:hover ul.main_header_dropdown {
+    display:block;
+    z-index:1000;
+}
+*/
+
+.main_header_csc_logo img {
+    height: 32px;
+    margin-left: 14px;
+}
+
+/* CSC Self-Service - header stylesheet */
+
+.main_header_middle {
+    border-bottom: 1px solid #a7a7a7;
+}
+
+.tickets_dashboard > ul {
+    padding-left: 0px !important;
+    margin-bottom: -5px !important;
+}
+
+.main_header_csc_logo {
+    margin-top: -3px;
+}
+
+.main_header_title_msg {
+    margin-top: 5px;
+    line-height: normal;
+    text-align: center;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #444 !important;
+    font-weight: 700;
+}
+
+nav.main_header_navigation ul > li:hover {
+    background: #939598;
+}
+
+nav.main_header_navigation ul > li:hover a {
+    color: #fff !important;
+}
+
+.main_header_right > ul {
+    display: inline-block;
+}
+
+.language_switcher_csc {
+    display: inline-block;
+    padding: 0px 0px 0px 7px;
+}
+
+/* @media screen and (-webkit-min-device-pixel-ratio:1.1) {
+    _:-webkit-full-screen, #count_dash_my_tix:before {
+        right: 319px;
+    }
+
+    _:-webkit-full-screen, #count_dash_my_req:before {
+        right: 218px;
+    }
+
+    _:-webkit-full-screen, #count_dash_my_appr:before {
+        right: 108px;
+    }
+} */
+
+@-moz-document url-prefix() {
+    #count_dash_my_tix:before {
+        right: 330px;
+    }
+
+    #count_dash_my_req:before {
+        right: 227px;
+    }
+
+    #count_dash_my_appr:before {
+        right: 112px;
+    }
+}
+
+@media (max-width: 549px) {
+    .outages_container {
+        /*background: #382658;*/
+        background-size: 145%;
+    }
+}
+
+.main_header_csc_logo > a:hover {
+    text-decoration: none;
+}
+
+p#total_count {
+    margin: 0;
+}
+
+.main_header_csc_logo .homepage_banner_text {
+    display: inline-block;
+    color: #000;
+    border: none;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+
+.main_header_csc_logo > a {
+    display: block;
+}
+
+.main_header_csc_logo .homepage_banner_text > h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    text-align: center;
+    width: 240px;
+    background: #fff;
+}
+
+.outages_container .homepage_banner_text h4 {
+    font-size: 24px;
+}
+
+.header_search_container {
+    /* float: right;*/
+    /*text-align: right;*/
+    /*padding-top: 11px;*/
+}
+
+.header_search_container > form {
+    padding-right: 13px;
+}
+
+.header_search_container input.header_search {
+    /*width: 300px;*/
+    width: 100%;
+    height: 30px;
+    margin-right: -7px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border: 1px solid #636466;
+}
+
+.header_search_container > form > .header_search_button {
+    display: inline-block;
+    margin-left: -14px;
+}
+
+.language_switcher_csc button.dropdown-toggle {
+    border: none;
+    padding: 0;
+    font-size: 12px;
+}
+
+.language_switcher_csc button.dropdown-toggle:hover {
+    background: #fff;
+    box-shadow: none;
+}
+
+@media (max-width: 767px) {
+    .main_header_csc_logo .homepage_banner_text > h3 {
+        padding: 0;
+        margin: 0;
+        font-size: 20px;
+        text-align: center;
+        width: 240px;
+        margin: 0 auto;
+        margin-top: 10px;
+    }
+
+    .main_header_csc_logo .homepage_banner_text {
+        color: #000;
+        border: none;
+        padding: 0;
+        margin: 0;
+        float: none;
+        display: block;
+    }
+
+    span#header-logos {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+    }
+}
+
+div.navbar-collapse.collapse > ul.nav.navbar-nav {
+    display: none;
+}
+
+div.navbar-collapse.collapse.in > ul.nav.navbar-nav {
+    display: block;
+}
+
+div.navbar-collapse.collapse.in > div.header_search_container {
+    display: block;
+}
+
+div.navbar-collapse.collapse > div.header_search_container {
+    display: none;
+}
+
+@media screen and (min-width: 550px) {
+    div.navbar-collapse.collapse > ul.nav.navbar-nav {
+        display: block;
+    }
+
+    div.navbar-collapse.collapse > div.header_search_container {
+        display: block;
+    }
+
+    .header_search_container {
+        float: right;
+        text-align: right;
+        padding-top: 11px;
+    }
+
+    .header_search_container input.header_search {
+        width: 300px;
+    }
+
+    @media (min-width: 768px) {
+        .col-sm-5 {
+            width: 100%;
+        }
+    }
+
+    .header-nav-dropdown-item {
+        color: #fff;
+    }
+
+    .main_header_navigation ul.dropdown-menu > li:hover .header-nav-dropdown-item {
+        color: #939598;
+    }
+
+    .main_header_navigation ul.dropdown-menu {
+        background-color: #939598;
+    }
+
+    .main_header_navigation ul.dropdown-menu > li {
+        background: transparent;
+    }
+
+    .main_header_navigation ul.dropdown-menu > li:hover {
+        background: #fff;
+        color: #000;
+    }
+}

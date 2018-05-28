@@ -1,0 +1,185 @@
+/**
+* CSS rules used mostly by UI11 and chat
+*/
+img, form {
+margin:0; padding:0; border:0;
+}
+
+.form {
+border-collapse:separate;
+}
+
+.clear {
+font-size:0; clear:both; margin:0; padding:0;
+}
+
+iframe {
+background-color: #fff;
+}
+
+/*** ANIMATED *********************************************************************************************************/
+.ia_loading { display:block; float:left; height:16px; width:16px; background-image:url(../images/animated/loading.gifx?v=11-22-2017_2104); }
+.ia_loading_small { display:inline-block; height:12px; width:12px; background-image:url(../images/animated/loading_sm_white.gifx?v=11-22-2017_2104); }
+.ia_loading_small_black { display:inline-block; height:12px; width:12px; background-image:url(../images/animated/loading_sm_black.gifx?v=11-22-2017_2104); }
+.ia_loading_small_gray { display:inline-block; height:12px; width:12px; background-image:url(../images/animated/loading_sm_gray.gifx?v=11-22-2017_2104); }
+.ia_loading_small_dark_black { display:inline-block; height:12px; width:12px; background-image:url(../images/animated/loading_sm_dark_black.gifx?v=11-22-2017_2104); }
+.ia_chat_blink { display:block; height:16px; width:16px; background-image:url(../images/animated/chat_blink.gifx?v=11-22-2017_2104); }
+
+/*** IMAGE :: SPRITE BASE *********************************************************************************************/
+.iSmall { font-size:0; line-height:0; background:url(../images/sprites/iSmall.pngx?v=11-22-2017_2104) no-repeat center center; display:inline-block; }
+.iMain { font-size:0; line-height:0; background:url(../images/sprites/iMain.pngx?v=11-22-2017_2104) no-repeat center center; display:inline-block; }
+.i12 { font-size:0; line-height:0; height:12px; width:12px; vertical-align:top; display:inline-block; background:url(../images/sprites/i12.pngx?v=11-22-2017_2104) no-repeat left top; }
+.i16 { font-size:0; line-height:0; height:16px; width:16px; vertical-align:top; display:inline-block; background:url(../images/sprites/i16.pngx?v=11-22-2017_2104) no-repeat left top; }
+.i32 { font-size:0; line-height:0;height:32px; width:32px; vertical-align:top; display:inline-block; background:url(../images/sprites/i32.pngx?v=11-22-2017_2104) no-repeat left top; }
+.i48 { font-size:0; line-height:0; height:48px; width:48px; vertical-align:top; display:inline-block; background:url(../images/sprites/i48.pngx?v=11-22-2017_2104) no-repeat left top;}
+
+.i16_inline {
+margin-right: 2px;
+margin-left: 2px;
+float: none;
+}
+
+div.i16_inline {
+line-height: 16px;	/* match the image height so we can have images inline with the div text without having different line heights for wrapped text */
+}
+
+/*** IMAGE :: SMALL SPRITE ********************************************************************************************/
+.iSmall_arrow_right_blue { width:8px; height:8px; background-position:0 0; }
+.iSmall_arrow_right_gray { width:8px; height:8px; background-position:0 -8px; }
+.iSmall_arrow_right_gray_sat { width:4px; height:7px; background-position:-8px -8px; }
+.iSmall_arrow_left_gray_sat { width:4px; height:7px; background-position:-12px -8px; }
+.iSmall_arrow_right_black { width:8px; height:8px; background-position:0 -16px; }
+.iSmall_arrow_down_blue { width:8px; height:5px; background-position:-0 -24px; }
+.iSmall_arrow_down_gray { width:8px; height:5px; background-position:0 -29px; }
+.iSmall_arrow_down_black { width:8px; height:5px; background-position:0 -34px; }
+.iSmall_mac_bubbles_hori { width:16px; height:6px; background-position:0 -39px; }
+.iSmall_mac_bubbles_vert { width:6px; height:16px; background-position:0 -51px; }
+.iSmall_mac_down_arrow { width:7px; height:4px; background-position:0 -67px; } a:hover > .iSmall_mac_up_arrow, .active .iSmall_mac_down_arrow { width:7px; height:4px; background-position:-8px -67px; }
+.iSmall_mac_up_arrow { width:7px; height:4px; background-position:0 -71px; }  a:hover > .iSmall_mac_up_arrow, .active .iSmall_mac_up_arrow { width:7px; height:4px; background-position:-8px -71px; }
+.iSmall_mac_right_arrow { width:4px; height:7px; background-position:0 -75px; } a:hover > .iSmall_mac_up_arrow, .active .iSmall_mac_right_arrow { width:4px; height:7px; background-position:-4px -75px; }
+.iSmall_mac_left_arrow { width:4px; height:7px; background-position:-8px -75px; } a:hover > .iSmall_mac_up_arrow, .active .iSmall_mac_left_arrow { width:4px; height:7px; background-position:-12px -75px; }
+.iSmall_arrow_down_sm { width:5px; height:3px; background-position:-1px -83px; } a:hover > .iSmall_arrow_down_sm, .active .iSmall_arrow_down_sm, button:hover .iSmall_arrow_down_sm { background-position:-9px -83px; }
+.iSmall_arrow_up_sm { width:5px; height:3px; background-position:-1px -86px; } a:hover > .iSmall_arrow_up_sm, .active .iSmall_arrow_up_sm, button:hover .iSmall_arrow_up_sm { background-position:-9px -86px; }
+
+
+/*** IMAGE :: MAIN SPRITE *********************************************************************************************/
+.iMain_bot_right_logo { background-position:0 0; width:240px; height:240px; }
+.iMain_arrow_up { background-position:-240px 0; width:64px; height:120px; }
+
+/*** IMAGE :: 12x12 SPRITE ********************************************************************************************/
+.i12_close_sm { background-position:0 -12px;} a:hover > .i12_close_sm, .active .i12_close_sm, .i12_close_sm:hover { background-position:-12px -12px; }
+.i12_close { background-position:0 -24px;} a:hover > .i12_close, .active .i12_close, .i12_close:hover { background-position:-12px -24px; }
+.i12_close2 { background-position:-24px -24px;} a:hover > .i12_close2, .active .i12_close2, .i12_close2:hover { background-position:-36px -24px; }
+.i12_refresh { background-position:0 -36px;} a:hover > .i12_refresh, .active .i12_refresh, .i12_refresh:hover { background-position:-12px -36px; }
+.i12_edit { background-position:0 -48px;} a:hover > .i12_edit, .active .i12_edit, .i12_edit:hover { background-position:-12px -48px; }
+.i12_edit2 { background-position:-24px -48px;} a:hover > .i12_edit2, .active .i12_edit2, .i12_edit2:hover { background-position:-36px -48px; }
+.i12_gear { background-position:0 -60px;} a:hover > .i12_gear, .active .i12_gear, .i12_gear:hover { background-position:-12px -60px; }
+.i12_star_yellow { background-position:0 -72px;} a:hover > .i12_star_yellow, .active .i12_star_yellow { background-position:-12px -72px; }
+.i12_star_gray { background-position:0 -84px;} a:hover > .i12_star_gray, .active .i12_star_grey { background-position:-12px -84px; }
+.i12_glass { background-position:0 -96px;} a:hover > .i12_glass, .active .i12_glass { background-position:-12px -96px; }
+.i12_glass2 { background-position:-24 -96px;} a:hover > .i12_glass2, .active .i12_glass2 { background-position:-36px -96px; }
+.i12_email { background-position:0 -108px;} a:hover > .i12_email, .active .i12_email { background-position:-12px -108px; }
+.i12_help { background-position:0 -120px;} a:hover > .i12_help, .active .i12_help { background-position:-12px -120px; }
+.i12_presence_green { background-position:0 -132px; }
+.i12_presence_red { background-position:0 -144px; }
+.i12_presence_dark { background-position:0 -156px; }
+.i12_presence_black { background-position:-12px -156px; }
+.i12_presence_black2 { background-position:-24px -156px; }
+.i12_presence_yellow { background-position:0 -168px; }
+.i12_trash { background-position:0 -180px; } a:hover > .i12_trash, .active .i12_trash { background-position:-12px -180px; }
+.i12_minimize { background-position:0 -192px; } a:hover > .i12_minimize, .active .i12_minimize, .i12_minimize:hover { background-position:-12px -192px; }
+.i12_popout { background-position:0 -204px; } a:hover > .i12_popout, .active .i12_popout, .i12_popout:hover { background-position:-12px -204px; }
+.i12_user { background-position:0 -216px; } a:hover > .i12_user, .active .i12_user { background-position:-12px -216px; }
+.i12_users { background-position:0 -228px; } a:hover > .i12_users, .active .i12_users { background-position:-12px -228px; }
+.i12_users2 { background-position:-24px -228px; } a:hover > .i12_users2, .active .i12_users2 { background-position:-36px -228px; }
+.i12_search2 { background-position:-24px -240px; } a:hover > .i12_search2, .active .i12_search2 { background-position:-36px -240px; }
+.i12_arrow_left2 { background-position:-24px -252px; } a:hover > .i12_arrow_left2, .active .i12_arrow_left2 { background-position:-36px -252px; }
+.i12_arrow_right2 { background-position:-24px -264px; } a:hover > .i12_arrow_right2, .active .i12_arrow_right2 { background-position:-36px -264px; }
+.i12_globe2 { background-position:-24px -276px; } a:hover > .i12_globe2, .active .i12_globe2 { background-position:-36px -276px; }
+.i12_user_agent2 { background-position:-24px -288px; } a:hover > .i12_user_agent2, .active .i12_user_agent2 { background-position:-36px -288px; }
+.i12_chat2 { background-position:-24px -300px; } a:hover > .i12_chat2, .active .i12_chat2 { background-position:-36px -300px; }
+.i12_back { background-position:0 -312px; } a:hover > .i12_back, .active .i12_back { background-position:-12px -312px; }
+.i12_eye { background-position:0 -324px; } a:hover > .i12_back, .active .i12_back { background-position:-12px -324px; }
+.i12_eye2 { background-position:-24px -324px; } a:hover > .i12_back, .active .i12_back { background-position:-36px -324px; }
+.i12_lock { background-position:0 -336px; } a:hover > .i12_back, .active .i12_back { background-position:-12px -336px; }
+.i12_lock2 { background-position:-24px -336px; } a:hover > .i12_back, .active .i12_back { background-position:-36px -336px; }
+.i12_plus { background-position:0 -348px; } a:hover > .i12_plus, .active .i12_plus { background-position:-12px -348px; }
+
+.i12_mod_email { background-position:0 -109px; height:9px; width:12px; }
+.i12_mod_lock { background-position:0 -337px; height:9px; width:12px; }
+.i12_mod_eye { background-position:0 -325px; height:9px; width:12px; }
+.i12_mod_email2 { background-position:-24px -109px; height:9px; width:12px; }
+.i12_mod_lock2 { background-position:-24px -337px; height:9px; width:12px; }
+.i12_mod_eye2 { background-position:-24px -325px; height:9px; width:12px; }
+
+/*** IMAGE :: 16x16 SPRITE ********************************************************************************************/
+.i16_separator {background-position:-24px 0; width:8px; }
+.i16_resize_grip_left { background-position:0 0; width:8px; height:8px; }
+.i16_resize_grip_right { background-position:-8px 0; width:8px; height:8px; }
+.i16_search { background-position:0 -16px; } a:hover .i16_search, .active .i16_search { background-position:-16px -16px; }
+.i16_user_online { background-position:0 -32px;}
+.i16_user_away { background-position:0 -48px;}
+.i16_user_invisible { background-position:0 -80px;}
+.i16_user_offline { background-position:0 -96px;}
+.i16_world { background-position:0 -112px; } a:hover > .i16_world, .active .i16_world { background-position:-16px -112px; }
+.i16_chat { background-position:0 -128px; } a:hover > .i16_chat, .active .i16_chat { background-position:-16px -128px; }
+.i16_home { background-position:0 -144px; } a:hover > .i16_home, .active .i16_home { background-position:-16px -144px; }
+.i16_star { background-position:0 -160px; } a:hover > .i16_star, .active .i16_star { background-position:-16px -160px; }
+.i16_new { background-position:0 -176px; } a:hover > .i16_new, .active .i16_new { background-position:-16px -176px; }
+.i16_uparrow { background-position:0 -192px; } a:hover > .i16_uparrow, .active i16_uparrow { background-position:-16px -192px; }
+.i16_close { background-position:0 -208px; } a:hover > .i16_close, .active .i16_close { background-position:-16px -208px; }
+.i16_gear { background-position:0 -224px; } a:hover > .i16_gear, .active .i16_gear { background-position:-16px -224px; }
+.i16_clock { background-position:0 -240px; } a:hover > .i16_clock, .active .i16_clock { background-position:-16px -240px; }
+.i16_user { background-position:0 -256px; } a:hover > .i16_user, .active .i16_user { background-position:-16px -256px; }
+.i16_add_user { background-position:0 -272px; } a:hover > .i16_add_user, .active .i16_add_user { background-position:-16px -272px; }
+.i16_check { background-position:0 -288px; } a:hover > .i16_check { background-position:-16px -288px; }
+.i16_support { background-position:0 -304px; }
+.i16_contacts { background-position:0 -320px; }
+.i16_expand { background-position:0 -336px; }  a:hover .i16_expand, .active .i16_expand { background-position:-16px -336px; }
+.i16_minus { background-position:0 -352px; }  a:hover .i16_minus, .active .i16_minus { background-position:-16px -352px; }
+.i16_chat_envelope { background-position:0 -368px; } a:hover .i16_chat_envelope, .active .i16_chat_envelope { background-position:-16px -368px; }
+.i16_check_small { background-position:0 -384px; }
+.i16_add_room { background-position:0 -400px; } a:hover > .i16_add_room, .active .i16_add_room { background-position:-16px -400px; }
+.i16_close2 { background-position:0 -416px; } a:hover > .i16_close2, .active .i16_close2 { background-position:-16px -416px; }
+.i16_toggle_up { background-position:0 -432px; } a:hover > .i16_toggle_up, .active .i16_toggle_up { background-position:-16px -432px; }
+.i16_toggle_down { background-position:0 -448px; } a:hover > .i16_toggle_down, .active .i16_toggle_down { background-position:-16px -448px; }
+.i16_smiley_face { background-position:0 -464px; }
+.i16_sound_off { background-position:0 -480px; } a:hover > .i16_sound_off, .active .i16_sound_off { background-position:-16px -480px; }
+.i16_sound_on { background-position:0 -496px; } a:hover > .i16_sound_on, .active .i16_sound_on { background-position:-16px -496px; }
+.i16_close3 { background-position:0 -512px; } a:hover > .i16_close3, .active .i16_close3 { background-position:-16px -512px; }
+.i16_toggle_left { background-position:0 -528px; }
+.i16_toggle_top { background-position:0 -544px; }
+.i16_split_left { background-position:0 -560px; }
+.i16_split_bottom { background-position:0 -576px; }
+
+.i16_emot_angry { background-position:0 -592px; }
+.i16_emot_blush { background-position:0 -608px; }
+.i16_emot_crying { background-position:0 -624px; }
+.i16_emot_foot_mouth { background-position:0 -640px; }
+.i16_emot_frown { background-position:0 -656px; }
+.i16_emot_gasp { background-position:0 -672px; }
+.i16_emot_grin { background-position:0 -688px; }
+.i16_emot_halo { background-position:0 -704px; }
+.i16_emot_kiss { background-position:0 -720px; }
+.i16_emot_lips_sealed { background-position:-16px -592px; }
+.i16_emot_money { background-position:-16px -608px; }
+.i16_emot_smile { background-position:-16px -624px; }
+.i16_emot_smile_tongue { background-position:-16px -640px; }
+.i16_emot_undecided { background-position:-16px -656px; }
+.i16_emot_sunglasses { background-position:-16px -672px; }
+.i16_emot_wink { background-position:-16px -688px; }
+.i16_emot_heart { background-position:-16px -704px; }
+
+/*** IMAGE :: 32x32 SPRITE ********************************************************************************************/
+.i32_support { background-position:0 0; }
+.i32_user { background-position:0 -32px; }
+.i32_userchat { background-position:0 -64px; }
+.i32_world { background-position:0 -96px; }
+
+/*** IMAGE :: 48x48 SPRITE ********************************************************************************************/
+.i48_support { background-position:0 0; }
+.i48_user { background-position:0 -48px; }
+.i48_users { background-position:0 -96px; }
+.i48_chatroom { background-position:0 -144px; }
+.i48_group { background-position:0 -192px; }
+.i48_maint { background-position:0 -240px; }

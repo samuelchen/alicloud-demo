@@ -1,0 +1,160 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fa/svg-with-js/css/fa-svg-with-js.css' %}">
+
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'css/theme_context_menu.css' %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'css/live_styles.css' %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'css/chat_activity.css' %}">#}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/heisenberg.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+
+    <script defer src="{% static 'fa/svg-with-js/js/fontawesome-all.min.js' %}"></script>
+
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="main_header_top row">
+        <div class="main_header_right col-xs-12">
+            <ul>
+                <li class="head">
+                    AWS Cloud 2 Enduser
+                </li>
+                <li class="head">
+                    <a href="#">My Profile</a></li>
+
+                <li class="head">
+                    <a href="#">Logout</a></li>
+            </ul>
+            <div class="language_switcher_csc">
+
+                <select name="lang_select" id="lang_select" data-width="fit" style="display: none;">
+                    <option value="en" selected="true">Webster's English</option>
+                </select>
+
+                <div class="btn-group bootstrap-select fit-width">
+                    <button type="button" class="btn btn-sm dropdown-toggle selectpicker btn-outline-secondary" data-toggle="dropdown"
+                            data-id="lang_select" title="" data-original-title="Webster's English"><span
+                            class="filter-option pull-left"><img src="{% static 'img/um.svg' %}" style="height: 12px;"> Webster's English</span>&nbsp;<span
+                            class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu pull-right open">
+                        <ul class="dropdown-menu inner selectpicker" role="menu">
+                            <li rel="0" class="selected"><a tabindex="0" class="" style="">
+                                <img src="{% static 'img/um.svg' %}"> Webster's English<i
+                                    class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="main_header_middle row">
+        <div class="main_header_csc_logo col-xs-12 col-sm-3 col-md-6 col-lg-6">
+                  <span id="header-logos">
+
+					 <a href="#">
+                         <img class="main_header_customer_log" src="{% static 'img/DXCLogo.pngx' %}"></a></span></div>
+
+        <div class="tickets_dashboard col-xs-12 col-sm-9 col-md-6 col-lg-6 pull-right">
+            <ul>
+                <li id="count_dash_my_cart">
+                    <a href="#">
+                        <span class="badge pull-right">0</span>
+                        <span class="count_dash_label">My Cart</span></a></li>
+                <li id="count_dash_my_appr">
+                    <a href="#">
+                        <span class="badge pull-right">0</span>
+                        <span class="count_dash_label">My Approvals</span></a></li>
+
+                <li id="count_dash_my_req">
+                    <a href="#">
+                        <span class="badge pull-right">6</span>
+                        <span class="count_dash_label">My Requests</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default main_header_navigation">
+        <div class="">
+
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button>
+            </div>
+
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+
+
+                    <li>
+
+
+                        <a id="menu_7fa4f649dba312006052bd9eaf96195b" href="../selfservice/home.do" target="">
+                            Home
+                        </a></li>
+
+
+                    <li>
+
+
+                        <a id="menu_545194f4dbee1a006cd53c8caf9619b8" href="../selfservice/service_catalog_v2.do"
+                           target="">
+                            Catalog
+                        </a></li>
+
+
+                    <li>
+
+
+                        <a id="menu_ef64a8d2db618fc0e7e3719dae961908" href="cloud_dashboard.do" target="">
+                            Cloud
+                        </a></li>
+
+
+                </ul>
+                <div class="header_search_container">
+                    <form action="search_results.do"><input name="sysparm_ck" id="sysparm_ck" type="hidden"
+                                                            value="d4b20a0513121b80121dd7028144b0ee50c2f56b716a9a77256cf8c3ca1f8603acd22e16">
+                        <input class="header_search" type="text" name="sysparm_search"
+                               placeholder="Search the self service portal...">
+
+                        <div class="header_search_button">
+                            <i class="fa fa-search"></i></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+{% block content %}
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endblock %}
+
+</body>
+</html>

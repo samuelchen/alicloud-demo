@@ -1,0 +1,96 @@
+/**
+* CSS stylesheet for the context menu used by all pages. The prefix for this CSS page is: "cm_". Note
+* that the z-index of the context menu is 1100. Plan other objects around this accordingly.
+*/
+/**********************************************************************************************************************/
+.cm_menuwrapper {
+position:absolute; z-index:1100; display:none;
+}
+.cm_menu {
+position:absolute; display:block; margin:0; padding:0;
+background:#f9f9f9 url(../images/backgrounds/context_menu_bg.pngx?v=11-22-2017_2104) repeat-x left bottom;
+border:1px solid #666; box-shadow: 0 1px 1px #777; -moz-box-shadow: 0 0 1px #777; -webkit-box-shadow: 0 1px 1px #777;
+}
+.cm_table { border-collapse:collapse; border:0; padding:0; margin:0; display:block; background:none !important; }
+.cm_table td {
+vertical-align:middle; display:block; background:none !important;
+}
+
+/**********************************************************************************************************************/
+.cm_row { position:relative; padding:0; }
+.cm_row > a {
+display:block; width:100%; height:100%; white-space:nowrap;
+color:#000; font-size:normal; text-decoration:none;
+}
+.cm_row a:hover { background-color:#e5e5e5; text-decoration:none; }
+.cm_row a.cm_arrow {
+background-image:url(../images/icons/context_menu_arrow.gifx?v=11-22-2017_2104);
+background-position:right center; background-repeat:no-repeat;
+}
+.cm_rowcontainer { height:24px; display:block; white-space:nowrap; }
+.cm_iconspacer { display:inline-block; vertical-align:top; padding:4px 0 0 3px; width:19px; }
+.cm_textspacer { display:inline-block; vertical-align:top; padding:5px 16px 0 3px; }
+/**********************************************************************************************************************/
+.cm_menuwrapper.dropdown { bottom: 0; }
+.cm_menuwrapper.dropdown .cm_menu { top: -1px; }
+.cm_menuwrapper.dropup { top: 0; }
+.cm_menuwrapper.dropup .cm_menu { bottom: -1px; }
+
+
+/**********************************************************************************************************************/
+.cm_separator_div {
+height:0; font-size:0; line-height:0; margin:2px 4px 1px 4px;
+border-bottom:1px solid #fff; border-top:1px solid #ccc;
+}
+
+/**********************************************************************************************************************/
+.cm_disabled a:hover { cursor:default; background:none !important; }
+.cm_disabled span { color:#888; }
+
+/**********************************************************************************************************************/
+
+/*** DARK OVERRIDES ***/
+.dark.cm_menuwrapper .cm_menu { box-shadow:none; -moz-box-shadow:none; -webkit-box-shadow:none; background: #2b2b2b; border: 1px solid #555; }
+.dark.cm_menuwrapper .cm_table { border: 1px solid #171717; }
+.dark.cm_menuwrapper .cm_row > a { font-size: 11px; color: #fff; }
+.dark.cm_menuwrapper.dropdown .cm_menu { top: -2px; }
+.dark.cm_menuwrapper.dropup .cm_menu { bottom: -2px; }
+.dark.cm_menuwrapper .cm_row a:hover {
+background: #111111; /* Needs to be slightly darker then active :: Check against IE6 */
+background: -moz-linear-gradient(top, #252525 0%, #111111 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#252525), color-stop(100%,#111111));
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#252525', endColorstr='#111111',GradientType=0 );
+}
+
+/**********************************************************************************************************************/
+
+/** Generic styles for context menu container dropdowns. Individual styles need to be applied appropriately. These
+styles just setup the base positioning and layout */
+
+.cm_container {
+position:relative;
+}
+.cm_container .trigger {
+position:relative; display:block; cursor:pointer; font-size:0;
+}
+.cm_container .trigger.context-open {
+border-left:1px solid #666666 !important; border-right:1px solid #666666 !important;
+z-index:1110;
+background:#f9f9f9;
+}
+.cm_container .trigger.context-open.dropdown {
+border-top:1px solid #666666; border-bottom:0; background-color:#f9f9f9 !important;
+}
+.cm_container .trigger.context-open.dropup {
+border-bottom:1px solid #666666; border-top:0; background-color:#ececec !important;
+}
+
+/* Padding:Set default to 1/0 */
+.cm_container .trigger { padding:1px; }
+.cm_container .trigger.context-open.dropdown { padding: 0 0 1px 0; }
+.cm_container .trigger.context-open.dropup { padding: 1px 0 0 0; }
+
+/* Padding:4px */
+.cm_container .trigger.padding4 { padding:4px; }
+.cm_container .trigger.context-open.dropdown.padding4 { padding: 3px 3px 4px 3px; }
+.cm_container .trigger.context-open.dropup.padding4 { padding: 4px 3px 3px 3px; }

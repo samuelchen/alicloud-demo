@@ -1,0 +1,962 @@
+/**
+* CSS stylesheet for all chat windows, notifications, and live messaging.
+*/
+
+/** GENERIC :: CENTER COLUMN ******************************************************************************************/
+td.expando_column {
+width: 100%;
+}
+
+/** GENERIC :: ROW HIGHLIGHT ******************************************************************************************/
+.row_highlight {
+border: 1px solid transparent;
+}
+
+.row_highlight > * {
+border: 1px solid transparent;
+}
+
+.row_highlight:hover, .row_highlight:focus {
+border: 1px solid #d8f1fa;
+cursor: default; /* May be overriden */
+outline: none;
+}
+
+.row_highlight:hover > *, .row_highlight:focus > * {
+border: 1px solid #f5fafd;
+background: #f4fafd url(../images/backgrounds/row_section_highlight_inner_bg.pngx) repeat-x left bottom;
+}
+
+/** GENERIC :: PROFILE_IMAGE ******************************************************************************************/
+
+.live_profile_image {
+border: 1px solid #ccc;
+display: block;
+/* DO NOT FLOAT THIS LEFT -- IE7 issues */
+}
+
+span.live_profile_image.small {
+height: 34px;
+width: 34px;
+}
+
+span.live_profile_image.medium {
+height: 50px;
+width: 50px;
+}
+
+span.live_profile_image {
+background-color: #f5fafd;
+text-align:center;
+}
+
+.live_profile_image > img {
+border: 1px solid #f5fafd;
+}
+
+/** GENERIC :: ACCORDIAN HEADER CONTAINER *****************************************************************************/
+
+.live_accordian_header {
+border: 1px solid #bbbbbb;
+-moz-user-select: none;
+-webkit-user-select: none;
+display: block;
+overflow-y: visible;
+}
+
+.linkclick:hover {
+cursor: pointer;
+}
+
+.live_accordian_header_image {
+margin-top: 0px;
+}
+
+.live_accordian_header > table {
+border-bottom: 1px solid #efefef;
+border-top: 1px solid #efefef;
+background-color: #eeeeee;
+padding: 0;
+margin: 0;
+display: block;
+width: 100%;
+border-collapse: collapse;
+}
+
+.live_accordian_header td {
+padding: 3px 0;
+margin: 0;
+vertical-align: middle;
+}
+
+.live_accordian_header .text {
+font-size: .8em;
+font-weight: bold;
+color: #333;
+}
+
+.live_stuff_expander {
+float: none;
+}
+
+.live_stuff_expander > span {
+float: none;
+display: block;
+margin-top: 1px;
+}
+
+/* Simulate the active when across the entire row */
+.live_accordian_header:hover { border: 1px solid #999; }
+.live_accordian_header:hover .text { color:#003863; }
+.live_accordian_header:hover > * { border-bottom: 1px solid #ecf8ff; border-top: 1px solid #ecf8ff; }
+.live_accordian_header:hover .i16_toggle_up { background-position: -16px -432px; }
+.live_accordian_header:hover .i16_toggle_down { background-position: -16px -448px; }
+
+/** GENERIC :: MINI GROUP CONTAINER ***********************************************************************************/
+
+.live_mini_group_container {
+font-weight: bold;
+font-size: 0.8em;
+color: #0d5aa8;
+}
+
+.live_mini_group_container:hover {
+color: #111;
+cursor: pointer;
+}
+
+.live_mini_group_container:hover .iSmall_arrow_down_blue {
+background-position:0 -29px; /* Switch from blue to gray */
+}
+
+.live_mini_group_container:hover .iSmall_arrow_right_blue {
+background-position:0 -8px; /* Switch from blue to gray */
+}
+
+.live_mini_group_container > * {
+padding: 1px 3px;
+}
+
+/** GENERIC :: FONTS **************************************************************************************************/
+
+.live_row_subtext {
+color: #555;
+font-size: 0.8em;
+}
+
+/** LIVE PRESENCE  ****************************************************************************************************/
+
+.live_presence_image {
+width: 12px;
+height: 12px;
+padding: 0px;
+margin: 2px;
+}
+
+.live_presence_status {
+margin-left: 10px;
+color: #999;
+}
+
+/** LIVE WINDOW *******************************************************************************************************/
+
+.live_mainframe {
+padding: 0;
+overflow-y: hidden;
+overflow-x: hidden;
+display: block;
+height: 100%;
+}
+
+/** LIVE WINDOW :: TOOLBAR ********************************************************************************************/
+
+.live_toolbar {
+background: none;
+width: 100%;
+display: table-cell; /* Displayed inside a nested table and we don't want absolute positioning to push the contents to 100% of the viewport */
+border-collapse: collapse;
+}
+
+.live_toolbar td {
+vertical-align: middle;
+padding: 0;
+}
+
+.live_toolbar .icon:hover {
+background: #ccc;
+cursor: pointer;
+}
+
+/** LIVE WINDOW :: CHAT ***********************************************************************************************/
+
+.live_chat_table {
+width: 100%;
+height: 100%;
+padding: 0;
+margin: 0;
+border: 0;
+border-collapse: collapse;
+background: none;
+}
+
+.live_chat_table td {
+vertical-align: top;
+}
+
+.live_chat_roster {
+white-space: nowrap;
+padding: 0;
+}
+
+.live_chat_roster_frame {
+padding: 0; /* Ensure 0 padding otherwise FloatingChatResizer will need to account for this plus browser quirks in setting height */
+overflow-y: auto; /* In order to prevent auto-jumping we must force this to scroll */
+overflow-x: hidden;
+min-width: 45px;
+}
+
+.live_chat_roster_users {
+float: left;
+width: auto !important;
+}
+
+.live_chat_roster_border {
+height: 100%;
+padding: 0;
+}
+
+.live_chat_roster_border_inner {
+width: 0px;
+height: 100%;
+border-right: 1px solid #a5a9b6;
+/* Readd the following if the background gradient is added back underneath the chat windows ::
+border-left: 1px solid #fff; */
+}
+
+.live_chat_message_pane {
+width: 100%;
+height: 100%;
+margin:0;
+padding:0;
+}
+
+.disabled .live_chat_message_pane {
+background: #f3f3f3;
+}
+
+.live_chat_roster_user {
+display: block;
+padding: 1px 6px 1px 0;
+}
+
+.live_chat_roster_user_indented {
+padding-left: 8px;
+}
+
+.live_chat_roster_user span.inner {
+display: inline-block;
+}
+
+.live_chat_roster_username {
+vertical-align: top;
+padding: 1px 0 0 4px;
+color: #000;
+font-size: 11px;
+}
+
+.live_chat_roster_username.invited {
+color: #aaa;
+}
+
+.live_chat_mainframe {
+overflow-y: auto;
+word-wrap: break-word;
+-moz-user-select: text;
+}
+
+.live_chat_mainframe a {
+color: blue;
+text-decoration: underline;
+}
+
+/**
+* We keep the padding separate from the [.live_chat_mainframe] class such that we can grep the outer
+* container and set heights accordingly depending on different browsers which may or may not include
+* the padding. (e.g. IE7). Note, the top padding of this needs to match the padding of the [live_chat_roster].
+*/
+.live_chat_mainframe_padding {
+padding: 4px;
+}
+
+.live_chat_messages.timestamps .live_chat_time_separator,
+.live_chat_messages.timestamps .live_chat_date_separator,
+.live_chat_messages.timestamps .live_chat_msg_timestamp {
+display: block;
+}
+
+.live_chat_history .live_chat_msg_user_me,
+.live_chat_history .live_chat_msg_user_q,
+.live_chat_history .live_chat_msg_user,
+.live_chat_history .live_chat_msg_text {
+color: gray !important;
+}
+
+/* Shrink the font size for edge windows */
+.nav_edge .live_chat_messages {
+font-size: 0.9em; /* Looks good on both IE, WinWebKit, MacFF/WebKit */
+}
+
+.live_chat_message {
+clear: both;
+}
+
+.live_chat_headline {
+color: #777;
+background-color:#f9f9f9;
+font-size: .9em;
+font-style: italic;
+padding: 1px 0;
+margin: 2px 0 4px 0;
+border: 1px solid #ddd;
+margin: 10px 0px 10px 0px;
+padding: 6px;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+
+.live_chat_msg_user_me {
+color: #0080c0;
+padding-right: 3px;
+font-weight: bold;
+}
+
+.live_chat_msg_user_q {
+float: left;
+color: #3355aa;
+white-space: nowrap;
+padding-right: 3px;
+font-weight: bold;
+}
+
+.live_chat_msg_user {
+color: #d5413a;
+padding-right: 3px;
+font-weight: bold;
+}
+
+.live_chat_date_separator {
+display: none;
+font-weight: bold;
+font-size: .8em;
+margin-top: 3px;
+text-align: right;
+}
+
+.live_chat_time_separator {
+display: none;
+font-size: 0;
+line-height: 0;
+height: 0px;
+padding: 0;
+margin: 5px 1px 0 1px;
+border-top: 1px solid #f4f4f4;
+}
+
+.live_chat_message_body {
+white-space: pre-wrap; /* Note: This requires DOCTYPE to be set to work properly in IE */
+display: block;
+padding: 2px 2px 0 2px;
+/* Do not display the width: 100% as this will push the underlying box underneath the vertical
+scrollbar which is the undesired effect in quirks mode. */
+}
+
+.live_chat_msg_text {
+word-wrap: break-word; /* Required for IE 5.5+ */
+}
+
+.live_chat_msg_timestamp {
+display: none;
+float: right;
+font-size: smaller;
+color: #666;
+margin-bottom: 3px; /* Required for pushing text of a message to wrap around the name (FF- Min:3px) */
+margin-left: 5px;
+}
+
+.live_chat_input_wrapper {
+display: block;
+padding: 4px 6px 4px 4px;
+overflow: hidden;
+position: relative;
+border: 0;
+margin: 0;
+}
+
+.live_chat_input {
+border: 1px solid #999;
+margin: 0;
+padding: 4px 0 4px 0;
+height: 16px;
+width: 100%;
+resize: none;
+background: #fff;
+color: #333;
+overflow:hidden;
+border-collapse: collapse;
+-moz-user-select: text;
+-webkit-user-select: text;
+box-sizing: content-box;
+-moz-box-sizing: content-box;
+-webkit-box-sizing: content-box;
+}
+
+.disabled .live_chat_input {
+background-color: #f3f3f3;
+}
+
+/** LIVE WINDOW :: CHAT/TOOLBAR ***************************************************************************************/
+
+.live_chat_toolbar {
+width: 100%;
+border-collapse: collapse;
+}
+
+.live_chat_toolbar td {
+vertical-align: middle;
+padding: 0;
+}
+
+.live_chat_toolbar_gear {
+display: block;
+}
+
+.live_chat_toolbar_sep_div {
+white-space: nowrap;
+width: 0;
+height: 14px;
+margin: 3px 4px 3px 4px;
+border-left: 1px solid #a5a9b6;
+border-right: 1px solid #fff;
+}
+
+.glide_box.dark .live_chat_toolbar_sep_div {
+border-left: 1px solid #000;
+border-right: 1px solid #424242;
+}
+
+.live_chat_toolbar_text {
+width: 100%;
+color: #888;
+font: normal 11px 'Segoe UI','Lucida Grande',Tahoma,Arial,sans-serif;
+padding-bottom: 1px;
+}
+
+.glide_box.dark .live_chat_toolbar_text {
+color: #c1c1c1;
+}
+
+a.live_window_link {
+color: WindowText;
+}
+
+a.live_window_link:hover {
+text-decoration: underline;
+}
+
+a.live_chat_roster_section_header {
+font-weight: bold;
+font-size: .8em;
+display: block;
+color: #333333;
+border: 1px solid transparent;
+}
+
+a.live_chat_roster_section_header:focus,
+a.live_chat_roster_section_header:active {
+outline: 0;
+}
+
+a.live_chat_roster_section_header span.child {
+display: block;
+border: 1px solid transparent;
+padding: 1px 4px 1px 2px;
+}
+
+a.live_chat_roster_section_header:hover {
+border: 1px solid #d8f1fa;
+text-decoration: none;
+}
+
+a.live_chat_roster_section_header:hover span.child {
+border: 1px solid #eff9fe;
+background: #eff9fe url(../images/backgrounds/row_section_highlight_inner_bg.pngx) repeat-x left bottom;
+}
+
+/** LIVE WINDOW :: USER WORK QUEUE ***********************************************************************************/
+.am_queue_leftspacer {
+padding: 8px 5px 0 0;
+}
+
+.am_queue_leftspacer span {
+font-weight: bold;
+color: tomato;
+}
+
+/** LIVE WINDOW :: AGENT WORK QUEUE ***********************************************************************************/
+.live_agent_mainframe {
+padding: 0;
+vertical-align: top;
+overflow-y: auto;
+}
+
+.live_agent_user_list {
+width: 100%;
+padding: 0;
+}
+
+.live_agent_user_pos {
+padding-right: 8px;
+padding-left: 8px;
+}
+
+.live_agent_user_info {
+width: 100%;
+padding-left: 2px;
+padding-right: 2px;
+}
+
+.live_agent_user_info_name {
+font-weight: bold;
+}
+
+.live_agent_user_help > button {
+visibility: hidden;
+}
+
+.live_agent_user_list tr:hover .live_agent_user_help > button {
+visibility: visible;
+}
+
+.live_agent_user_time_live {
+font-size: 11px;
+}
+
+.live_agent_user_info .live_row_subtext {
+font-size: 12px;
+}
+
+/******* FLOATING STYLES ********/
+.floating.live_agent_user_list {
+border-collapse: collapse;
+border-bottom: 1px solid #ddd;
+}
+.floating.live_agent_user_list td {
+padding-top: 6px;
+padding-bottom: 6px;
+height: 40px;
+vertical-align: middle;
+border-top: 1px solid #ddd;
+}
+.floating.live_agent_user_list tr:hover td {
+background: #fdfce1 url(../images/backgrounds/highlight_bg.pngx) repeat-x left bottom;
+}
+.floating .live_agent_user_pos span {
+color: tomato;
+font-weight: bold;
+font-size: 12pt;
+}
+.floating .live_agent_help_next {
+font-size: 14px;
+padding: 2px 10px;
+}
+.floating .live_agent_user_help {
+width: 63px;
+}
+.floating .live_agent_user_time_live {
+color: gray;
+}
+
+/******* EDGE STYLES ********/
+.edge.live_agent_user_list {
+border-collapse: separate;
+background: none;
+border-bottom: 1px solid #424242;
+}
+.edge.live_agent_user_list td {
+padding-top: 7px;
+padding-bottom: 7px;
+}
+.edge .live_agent_user_info1 {
+color: #e0e0e0;
+}
+.edge .live_agent_user_pos span {
+color: tomato;
+font-weight: bold;
+font-size: 12pt;
+}
+.edge .live_agent_user_info_name {
+color: #fff;
+}
+.edge .live_agent_user_time_live {
+color: #b0b0b0;
+}
+.edge .live_agent_user_info .live_row_subtext {
+color: #e0e0e0;
+}
+
+
+/** "MY STUFF"/USER LIST  *********************************************************************************************/
+
+.live_stuff_container {
+padding: 0;
+margin: 0;
+height: 100%;
+-moz-user-select: none;
+-webkit-user-select: none;
+}
+
+.live_stuff_container.disabled > div {
+display: none;
+}
+.live_stuff_container.disabled > .live_stuff_container_offline {
+display: block !important;
+}
+
+.live_stuff_friends_title > table {
+margin: 3px 0;
+padding: 0;
+background: transparent;
+width: 100%;
+display: block;
+min-height: 44px;
+}
+
+.live_stuff_friends_title > table td {
+padding: 0;
+vertical-align: middle;
+}
+
+.live_my_profile_image_container {
+position: relative;
+overflow: hidden;
+margin: 2px 4px 2px 4px;
+box-shadow:0 0 2px #999;
+-moz-box-shadow:0 0 2px #999;
+-webkit-box-shadow:0 0 2px #999;
+display: block;
+}
+
+.live_my_profile_image_container:hover {
+cursor: pointer;
+}
+
+.live_stuff_friends_title .live_profile_image {
+border: 1px solid #777; /* Need to darken it up a bit for header */
+}
+
+/** Match the input behind it with similar margins and similar height */
+.edge_buddy_tooltip input,
+.live_my_profile_image_container input {
+left: 0;
+top: 0;
+width: 34px; /* Overriden by browser anyway */
+height: 34px;
+font-size: 34px;
+line-height: 34px;
+position: absolute;
+z-index: 9999;
+opacity: 0;
+filter: alpha(opacity=0);
+cursor: pointer; /* Won't work regardless */
+}
+
+.live_stuff_roster_my_name {
+font-weight: bold;
+font-size: 1.2em;
+padding: 2px 0;
+}
+
+table.live_stuff_roster_my_status {
+border-collapse: collapse;
+margin: 0;
+padding: 0;
+display: block;
+width: 100%;
+background: transparent;
+}
+
+table.live_stuff_roster_my_status td {
+vertical-align: middle;
+}
+
+.live_stuff_roster_my_status_text {
+margin: 0 2px 0 0;
+padding: 0;
+color: #555;
+font-size: 0.8em;
+font-style: italic;
+min-height: 16px;
+}
+
+.live_stuff_roster_my_status_text {
+margin: 0 2px 0 0;
+padding: 0;
+color: #555;
+font-size: 0.8em;
+font-style: italic;
+min-height: 16px;
+}
+
+.live_stuff_roster_my_status:hover {
+cursor: text;
+}
+
+.live_stuff_container_offline {
+display: none;
+padding: 3px;
+font-size: .9em;
+font-style: italic;
+}
+
+/**********************/
+
+.live_stuff_row table {
+margin: 0;
+padding: 0;
+border-collapse: collapse;
+background: transparent;
+}
+.live_stuff_row td {
+padding: 0;
+margin: 0;
+vertical-align: middle;
+}
+.live_stuff_row td.expando_column {
+padding: 1px;
+}
+
+
+/** GROUP SECTIONS **/
+.live_roster_group_friends {}
+.live_roster_group_rooms {}
+
+/** ROSTER ROW FORMATTING **/
+
+.live_stuff_text_main {
+font-weight: normal;
+font-size: 0.9em;
+}
+
+.live_stuff_text_sub {
+color: #333;
+font-size: 0.8em;
+font-style: italic;
+}
+.live_stuff_right_icon {
+white-space: nowrap;
+}
+
+.live_stuff_text_sub_created {
+color: #999;
+font-size: 0.8em;
+}
+
+.live_stuff_right_icon > span.i16 {
+margin: 0 3px 0 4px;
+float: none;
+display: block;
+}
+
+/**********************/
+
+.live_stuff_link_section {
+padding: 2px 3px 3px 10px;
+font-size: .9em;
+line-height: 1.4em;
+font-style: italic;
+}
+
+.live_stuff_container_offline a,
+.live_stuff_link_section a {
+color: blue;
+padding-left: 3px;
+}
+
+/** "MY STUFF" ROSTER ROOM SEARCH *************************************************************************************/
+
+.live_stuff_room_search {
+border-top: 1px solid #c2c2c2;
+background: #fff url(../images/background/roster_search_background_center.pngx) repeat-x left center;
+padding: 6px 5px 5px 5px;
+}
+
+.live_stuff_search_box table {
+padding: 0;
+margin: 0;
+width: 100%;
+border-collapse: collapse;
+}
+
+.live_stuff_search_box {
+border-top: 1px solid #7d99b0;
+border-bottom: 1px solid #abc1d2;
+border-left: 1px solid #8da7bc;
+border-right: 1px solid #8da7bc;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+display: block;
+background-color: #fff;
+}
+
+.live_stuff_search_box input {
+color: #333;
+font-size: 11px;
+font-style: italic;
+border: none;
+background-color: #fff;
+width: 100%;
+height: 16px;
+padding: 2px 1px 2px 2px;
+}
+
+/** "MY STUFF" TOOLBAR ************************************************************************************************/
+
+.live_roster_toolbar .item {
+float: left;
+}
+
+.live_toolbar_invite_count {
+position: absolute;
+background: red;
+left: 18px; /* Width : 24px --> Move in rightward direction .. yeah baby nice trick :) */
+top: 2px;
+padding: 1px;
+border: 0 !important;
+white-space: nowrap;
+font: bold 9px Tahoma;
+color: #fff;
+text-decoration: none;
+outline: none;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+}
+
+.live_stuff_toolbar_room_invite_row {
+max-width: 380px;
+width: 380px;
+word-wrap: break-word;
+text-decoration: none;
+padding: 3px;
+}
+
+.live_stuff_toolbar_room_invite_row table {
+border-collapse: collapse;
+border: 0;
+padding: 0;
+background-color: transparent;
+}
+
+.live_stuff_toolbar_room_invite_row table td {
+display: table-cell;
+}
+
+.live_stuff_toolbar_room_invite_row_roomname {
+font-size: 1em;
+font-weight: bold;
+}
+
+.live_stuff_toolbar_room_invite_row_invited {
+font-size: smaller;
+margin-top: 3px;
+}
+
+
+/** ERROR DIALOG ******************************************************************************************************/
+
+.live_error_text {
+font-weight: bold;
+color: tomato;
+padding-bottom: 8px;
+}
+
+/** LIVE OVERLAY SEARCH ***********************************************************************************************/
+
+.live_overlay_search_field {
+width: 220px;
+}
+
+.live_overlay_loading_container {
+margin: 0 0 0 4px;
+padding: 10px 0;
+}
+
+.live_overlay_search_box {
+margin: 4px 0 4px 0;
+border: 1px solid #aaa;
+height: 210px;
+overflow: auto;
+}
+
+.live_overlay_search_errors > div {
+padding: 4px;
+}
+
+.live_overlay_search_results_info {
+color: #888;
+}
+
+.live_online_count_filter_matches,
+.live_online_count_total_matches {
+font-weight: bold;
+}
+
+
+/** LIVE LIST *********************************************************************************************************/
+
+.live_list_column {
+display: block;
+padding: 3px;
+}
+
+.live_list_column:hover {
+background: #e5e5e5;
+cursor: hand;
+cursor: pointer;
+}
+
+.live_list_roster {
+border-collapse: collapse;
+}
+
+table.live_list_roster,
+.live_list_roster td {
+margin: 0;
+padding: 0;
+background-color: transparent;
+}
+
+.live_list_roster td {
+vertical-align: middle;
+}
+
+.live_list_roster_icon {
+display: block;
+float: left; /* Wrap around all the bogus spacing from different img styles/spans/divs */
+width: 16px;
+height: 16px;
+margin: 0 3px 0 0;
+}
+
+.live_list_roster_icon > * {
+float: left;
+}
+
+.live_list_roster_status {
+display: block;
+color: #888888;
+font-size: smaller;
+margin-top: -1px;
+}
