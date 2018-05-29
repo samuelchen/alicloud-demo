@@ -7,93 +7,122 @@
 
 
 {% block content %}
-    <h1>ECS - Elastic Compute Service</h1>
 
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/oss/">OSS - Object Storage Service</a></li>
-        <li><a href="/backup/">CPS Backup Service</a></li>
-    </ul>
+
     <div style="padding-left: 30px">
+        <h2>DXC Managed Service for AliCloud - ECS Demo</h2>
+        {#        <ul>#}
+        {#            <li><a href="/">Home</a></li>#}
+        {#            <li><a href="/oss/">OSS - Object Storage Service</a></li>#}
+        {#            <li><a href="/backup/">CPS Backup Service</a></li>#}
+        {#        </ul>#}
         <form method="POST">
             {% csrf_token %}
-            <label for="region">Regions:</label>
-            <select id="region" name="region" onchange="this.form.submit();">
-                {% for r in regions.Regions.Region %}
-                <option value="{{ r.RegionId }}" {% if request.POST.region == r.RegionId %}selected{% endif %}>{{ r.RegionId }}</option>
-                {% endfor %}
-            </select>
+            <div class="panel panel-default panel-heading row">
 
-            <label for="zone">Zones:</label>
-            <select id="zone" name="zone" onchange="this.form.submit();">
-                {% for r in zones.Zones.Zone %}
-                <option value="{{ r.ZoneId }}" {% if request.POST.zone == r.ZoneId %}selected{% endif %}>{{ r.ZoneId }}</option>
-                {% endfor %}
-            </select>
+                <div class="input-group col-2">
+                    <label for="region" class="input-group-addon">Region</label>
+                    <select id="region" class="form-control" name="region" onchange="this.form.submit();">
+                        {% for r in regions.Regions.Region %}
+                            <option value="{{ r.RegionId }}"
+                                    {% if request.POST.region == r.RegionId %}selected{% endif %}>{{ r.RegionId }}</option>
+                        {% endfor %}
+                    </select></div>
+                &nbsp;
+                <div class="input-group col-2">
+                    <label for="zone" class="input-group-addon">Zone</label>
+                    <select id="zone" class="form-control" name="zone" onchange="this.form.submit();">
+                        {% for r in zones.Zones.Zone %}
+                            <option value="{{ r.ZoneId }}"
+                                    {% if request.POST.zone == r.ZoneId %}selected{% endif %}>{{ r.ZoneId }}</option>
+                        {% endfor %}
+                    </select></div>
+                &nbsp;
+                <div class="input-group col-2">
+                    <label for="flavor" class="input-group-addon">Size</label>
+                    <select id="flavor" class="form-control" name="flavor">
+                        {% for r in flavors %}
+                            <option value="{{ r }}"
+                                    {% if request.POST.flavor == r %}selected{% endif %}>{{ r }}</option>
+                        {% endfor %}
+                    </select></div>
+                &nbsp;
+                <div class="input-group col-2">
+                    <label for="image" class="input-group-addon">Image</label>
+                    <select id="image" class="form-control" name="image">
+                        {% for r in images.Images.Image %}
+                            {% if r.Status == 'Available' %}
+                                <option value="{{ r.ImageId }}"
+                                        {% if request.POST.image == r.ImageId %}selected{% endif %}>{{ r.OSType }}
+                                    - {{ r.Architecture }} - {{ r.ImageName }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select></div>
+                &nbsp;
+                <div class="input-group col-3">
+                    <input id="action" name="action" type="hidden" value="">
+                    <input id="kwargs" name="kwargs" type="hidden" value="">
+                    <button id="create" type="button" class="btn btn-primary" style="height: 28px;">Create Instance
+                    </button>&nbsp;
+                    <button id="refresh" type="button" class="btn btn-primary" style="height: 28px;">Refresh</button>
+                </div>
+            </div>
 
-            <label for="flavor">Size:</label>
-            <select id="flavor" name="flavor">
-                {% for r in flavors %}
-                <option value="{{ r }}" {% if request.POST.flavor == r %}selected{% endif %}>{{ r }}</option>
-                {% endfor %}
-            </select>
-
-            <br>
-            <label for="image">Images:</label>
-            <select id="image" name="image">
-                {% for r in images.Images.Image %}
-                    {% if r.Status == 'Available' %}
-                <option value="{{ r.ImageId }}" {% if request.POST.image == r.ImageId %}selected{% endif %}>{{ r.OSType }} - {{ r.Architecture }} - {{ r.ImageName }}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-
-            <br>
-            <input id="action" name="action" type="hidden" value="">
-            <input id="kwargs" name="kwargs" type="hidden" value="">
-            <button id="create" type="button" >Create Instance</button>
-            <button id="refresh" type="button" >Refresh</button>
-
-            <div>
-                <label for="vms">Virtual Machines:</label>
-                <table id="vms" border="1px" style="width: 95%;">
-                    <thead>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <label for="vms">Virtual Machines:</label></div>
+                <div class="panel-body">
+                    <table id="vms" class="table table-hover table-striped table-bordered">
+                        <thead>
                         <tr>
-                            <td>ID</td><td>Type</td>
-                            <td>Region</td><td>Zone</td><td>Status</td>
+                            <td>ID</td>
+                            <td>Type</td>
+                            <td>Region</td>
+                            <td>Zone</td>
+                            <td>Status</td>
                             <td>Float IP</td>
-{#                            <td>Public IPs</td>#}
+                            {#                            <td>Public IPs</td>#}
                             <td>VPC IPs</td>
-{#                            <td>Internal IPs</td>#}
+                            {#                            <td>Internal IPs</td>#}
                             <td>Tags</td>
                             <td>Actions</td>
                         </tr>
-                    </thead>
-                    {% for r in vms.Instances.Instance %}
-                    <tr>
-                        <td>{{ r.InstanceId }}</td><td>{{ r.InstanceType }}</td>
-                        <td>{{ r.RegionId }}</td><td>{{ r.ZoneId }}</td><td>{{ r.Status }}</td>
-                        <td>{{ r.EipAddress.IpAddress }}</td>
-{#                        <td>{% for ip in r.PublicIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>#}
-                        <td>{% for ip in r.VpcAttributes.PrivateIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>
-{#                        <td>{% for ip in r.InnerIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>#}
-                        <td>
-                            {% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}
-                        </td>
-                        <td>
-                            <a class="tag" args="{{ r.InstanceId }}" kwargs="{% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}" href="#"><i class="fa fa-tags"></i></a>
-                            {% if r.Status.lower == 'stopped' %}
-                            <a class="start" args="{{ r.InstanceId }}" href="#"><i class="fa fa-play"></i></a>
-                            <a class="delete" args="{{ r.InstanceId }}" href="#"><i class="fa fa-trash-alt"></i></a>
-                            {% endif %}
-                            {% if r.Status.lower == 'running' %}
-                            <a class="stop" args="{{ r.InstanceId }}" href="#"><i class="fa fa-stop"></i></a>
-                            <a class="reboot" args="{{ r.InstanceId }}" href="#"><i class="fa fa-recycle"></i></a>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
+                        </thead>
+                        {% for r in vms.Instances.Instance %}
+                            <tr>
+                                <td>{{ r.InstanceId }}</td>
+                                <td>{{ r.InstanceType }}</td>
+                                <td>{{ r.RegionId }}</td>
+                                <td>{{ r.ZoneId }}</td>
+                                <td>{{ r.Status }}</td>
+                                <td>{{ r.EipAddress.IpAddress }}</td>
+                                {#                        <td>{% for ip in r.PublicIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>#}
+                                <td>{% for ip in r.VpcAttributes.PrivateIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>
+                                {#                        <td>{% for ip in r.InnerIpAddress.IpAddress %}{{ ip }} {% endfor %}</td>#}
+                                <td>
+                                    {% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}
+                                </td>
+                                <td>
+                                    <a class="tag" title="tag" args="{{ r.InstanceId }}"
+                                       kwargs="{% for t in r.Tags.Tag %} {{ t.TagKey }}={{ t.TagValue }}, {% endfor %}"
+                                       href="#"><i class="fa fa-tags"></i></a>
+                                    {% if r.Status.lower == 'stopped' %}
+                                        <a class="start" title="start" args="{{ r.InstanceId }}" href="#"><i
+                                                class="fa fa-play"></i></a>
+                                        <a class="delete" title="delete" args="{{ r.InstanceId }}" href="#"><i
+                                                class="fa fa-trash-alt"></i></a>
+                                    {% endif %}
+                                    {% if r.Status.lower == 'running' %}
+                                        <a class="stop" title="stop" args="{{ r.InstanceId }}" href="#"><i
+                                                class="fa fa-stop"></i></a>
+                                        <a class="reboot" title="reboot" args="{{ r.InstanceId }}" href="#"><i
+                                                class="fa fa-recycle"></i></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
         </form>
     </div>
@@ -107,51 +136,51 @@
         var kwargs = $("#kwargs");
         var form = $("form");
 
-        $("#create").click(function(){
+        $("#create").click(function () {
             action.val('create');
             form.submit();
         });
-        $("#refresh").click(function(){
+        $("#refresh").click(function () {
             action.val('refresh');
             form.submit();
         });
-        $(".start").click(function(){
+        $(".start").click(function () {
             var args = $(this).attr('args');
-            action.val('start '+ args);
+            action.val('start ' + args);
             form.submit();
         });
-        $(".stop").click(function(){
+        $(".stop").click(function () {
             var args = $(this).attr('args');
             action.val('stop ' + args);
             form.submit();
         });
-        $(".reboot").click(function(){
+        $(".reboot").click(function () {
             var args = $(this).attr('args');
             action.val('reboot ' + args);
             form.submit();
         });
-        $(".delete").click(function(){
+        $(".delete").click(function () {
             console.log('delete');
             var args = $(this).attr('args');
             action.val('delete ' + args);
             form.submit();
         });
-        $(".tag").click(function(){
+        $(".tag").click(function () {
             var args = $(this).attr("args");
             var tags = $(this).attr("kwargs");
             var new_tags = window.prompt("Please edit tags:", tags);
             console.log(new_tags);
             if (new_tags == null || new_tags == tags)
                 return;
-{#            var tag_arr = new_tags.split(',');#}
+            {#            var tag_arr = new_tags.split(',');#}
             kwargs.val(new_tags);
             action.val('tag ' + args);
             form.submit();
-{#            $.each(tag_arr, function(idx){#}
-{#                if (tag_arr[idx]){#}
-{#                    console.log(tag_arr[idx]);#}
-{#                }#}
-{#            });#}
+            {#            $.each(tag_arr, function(idx){#}
+            {#                if (tag_arr[idx]){#}
+            {#                    console.log(tag_arr[idx]);#}
+            {#                }#}
+            {#            });#}
         });
     </script>
 {% endblock %}

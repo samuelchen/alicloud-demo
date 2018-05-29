@@ -7,14 +7,16 @@
 
 
 {% block content %}
-    <h1>DXC Managed Service for Alibaba Cloud - Backup service Demo</h1>
+        <div style="padding-left: 30px">
 
-    <ul>
-        <li><a href="{% url 'ecs' %}">ECS - Elastic Compute Service</a></li>
-        <li><a href="{% url 'oss' %}">OSS - Object Storage Service</a></li>
-        <li><a href="{% url 'backup' %}">Backup - Snapshots</a></li>
-    </ul>
+    <h2>DXC Managed Service for AliCloud - Backup service Demo</h2>
 
+{#    <ul>#}
+{#        <li><a href="{% url 'ecs' %}">ECS - Elastic Compute Service</a></li>#}
+{#        <li><a href="{% url 'oss' %}">OSS - Object Storage Service</a></li>#}
+{#        <li><a href="{% url 'backup' %}">Backup - Snapshots</a></li>#}
+{#    </ul>#}
+</div>
 
 <form class="form-horizontal" role="form" method="POST">
     {% csrf_token %}

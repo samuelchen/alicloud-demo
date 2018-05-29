@@ -100,8 +100,10 @@ class BackupView(TemplateView):
                     v = t['TagValue']
                     tags[k] = v
 
-            if not tags:
-                tags = {'Backup': False, 'BackupSchedule': 'Default'}
+            if 'Backup' not in tags:
+                tags['Backup'] = False
+            if 'BackupSchedule' not in tags:
+                tags['BackupSchedule'] = 'Default'
             vm['tags'] = tags
         context['vms'] = vms
 

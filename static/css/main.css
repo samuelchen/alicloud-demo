@@ -604,3 +604,8 @@ div.navbar-collapse.collapse > div.header_search_container {
         color: #000;
     }
 }
+
+
+thead td {
+    font-weight: bold;
+}
