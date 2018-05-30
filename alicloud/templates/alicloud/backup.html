@@ -25,7 +25,7 @@
                     <select class="form-control" id="region" name="region" onchange="this.form.submit();">
                         {% for r in regions.Regions.Region %}
                             <option value="{{ r.RegionId }}"
-                                    {% if request.POST.region == r.RegionId %}selected{% endif %}>{{ r.RegionId }}</option>
+                                    {% if region == r.RegionId %}selected{% endif %}>{{ r.RegionId }}</option>
                         {% endfor %}
                     </select></div>
                 &nbsp;

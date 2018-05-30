@@ -74,8 +74,14 @@ class BackupView(TemplateView):
 
         regions = list_regions()
         context['regions'] = regions
-        if not region:
-            region = regions['Regions']['Region'][0]['RegionId']
+
+        if region:
+            self.request.session['region'] = region
+        else:
+            region = self.request.session.get('region', regions['Regions']['Region'][0]['RegionId'])
+            # region = regions['Regions']['Region'][0]['RegionId']
+
+        context['region'] = region
 
         # backup_handler = BackupHandler(region=region, access_key=settings.ACCESS_KEY, access_key_secret=settings.ACCESS_KEY_SECRET)
 

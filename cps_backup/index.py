@@ -23,8 +23,8 @@ from aliyun.log.putlogsrequest import PutLogsRequest
 
 logging.basicConfig(level=logging.INFO,
                     format='%(levelname)-8s [%(asctime)s] %(name)-30s [%(lineno)d] %(message)s')
-# log = logging.getLogger(__name__)
-log = None
+log = logging.getLogger('BACKUP')
+# log = None
 
 # CloudWatch and SNS definitions:
 # BackupTag = 'Backup'
@@ -50,6 +50,11 @@ def handler(event, context):
     # log.info('%s  %s  %s' % (context.region, context.credentials.access_key_id, context.credentials.access_key_secret))
 
     parms = json.loads(event)
+    if 'triggerName' in parms:
+        log.info('Invoked by trigger %s' % parms.get('triggerName'))
+        payload = parms.get('payload', {})
+        parms = json.loads(payload)
+
     event_name = parms.get('resources')
     optional_tag = parms.get('BackupSchedule')
 
@@ -61,9 +66,9 @@ def handler(event, context):
         access_key = cred.access_key_id
         access_key_secret = cred.access_key_secret
 
-    global log
-    log = AliYunLogService(access_key, access_key_secret, region='cn-hangzhou')
-    log.info('CPS Backup service triggered.')
+    # global log
+    # log = AliYunLogService(access_key, access_key_secret, region='cn-hangzhou')
+    log.info('Backup service triggered.')
 
     backup_handler = BackupHandler(optional_tag=optional_tag, region='cn-hangzhou',
                                    access_key=access_key, access_key_secret=access_key_secret)
@@ -78,7 +83,10 @@ def handler(event, context):
         backup_handler.delete_backups()
     else:
         log.info('LAMBDA WAS NOT CALLED FROM CREATE OR DELETE CRON')
+        log.info(str(event))
+        return False
 
+    return True
 
 class BackupHandler(object):
 
@@ -217,8 +225,8 @@ class BackupHandler(object):
                         k = t['TagKey']
                         v = t['TagValue']
                         if k == self.delete_period_tag:
-                            delete_on = datetime.strftime(v)
-                            log.info('Backup delete on %s' % delete_on)
+                            delete_on = datetime.strptime(v, '%Y-%m-%d %H:%M:%S')
+                            log.info('\t Snapshot %s will be deleted on %s' % (s['SnapshotId'], delete_on))
                             if delete_on <= datetime.utcnow():
                                 self.del_snapshots(s['SnapshotId'])
 
@@ -249,7 +257,7 @@ class BackupHandler(object):
                     keep_tags[tag['TagKey']] = tag['TagValue']
 
         if delete_on:
-            keep_tags[self.delete_period_tag] = str(delete_on)
+            keep_tags[self.delete_period_tag] = delete_on.strftime('%Y-%m-%d %H:%M:%S')
 
         keep_tags['Name'] = 'InstanceId: ' + instance['InstanceId']
         # volume name tag:  <Instance-Name-Tag>-<Volume-Device>
@@ -374,20 +382,22 @@ class BackupHandler(object):
         # request.add_query_param('RegionId', region)
         request.add_query_param('PageSize', 100)
         response = self.asc_client.do_action_with_exception(request)
-        r = json.loads(response.decode())
+        r = response.decode()
         log.debug(r)
+        r = json.loads(r)
         return r
 
     def del_snapshots(self, snapshot_id):
         # client = create_acs_client(region=self._region)
-
+        log.info('Deleting snapshot %s' % snapshot_id)
         request = DeleteSnapshotRequest.DeleteSnapshotRequest()
         request.set_action_name('DeleteSnapshot')
         request.set_SnapshotId(snapshot_id)
         # request.add_query_param('RegionId', region)
         response = self.asc_client.do_action_with_exception(request)
-        r = json.loads(response.decode())
+        r = response.decode()
         log.debug(r)
+        r = json.loads(r)
         return r
 
 
@@ -409,6 +419,8 @@ class AliYunLogService(object):
     def log(self, contents, topic, source):
         level = int(getattr(logging, topic))
         self._pylog.log(level=level, msg=contents)
+
+        return
 
         contents = [('msg', contents), ]
         logitemList = []
@@ -438,6 +450,8 @@ if __name__ == '__main__':
     # log = AliYunLogService(access_key, access_key_secret, region='cn-hangzhou')
     # log.info('CPS Backup service triggered.')
     context = fake_context()
-    event = json.dumps({'resources': 'Create', 'BackupSchedule': 'Default'})
+
+    # event = json.dumps({'resources': 'Delete', 'BackupSchedule': 'Default'})
+    event = '{"triggerTime":"2018-05-30T08:21:00Z","triggerName":"test","payload":"{\\n \\"resources\\": \\"Create\\", \\n \\"BackupSchedule\\": \\"Default\\",\\n \\"credentials\\": {\\n \\"access_key_id\\": \\"LTAIf1l5sGeW4Xiv\\",\\n \\"access_key_secret\\": \\"TVQXT4saAlXM1V2KaFagQbazpZysEU\\"\\n }\\n}"}'
 
     handler(event, context)
